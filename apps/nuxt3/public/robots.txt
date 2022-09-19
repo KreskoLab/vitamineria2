@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /account/
+Disallow: /order
+Sitemap: https://admin.vitamineria.com.ua/sitemap/index.xml

@@ -1,0 +1,43 @@
+{
+  "name": "strapi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-custom": "*",
+    "prettier-config-custom": "*",
+    "shared-types": "*",
+    "@types/node": "^18.7.18",
+    "@types/koa": "^2.13.5"
+  },
+  "dependencies": {
+    "@strapi/strapi": "4.3.2",
+    "@strapi/plugin-users-permissions": "4.3.2",
+    "@strapi/plugin-i18n": "4.3.2",
+    "@strapi/provider-email-sendgrid": "^4.3.2",
+    "@strapi/provider-upload-cloudinary": "^4.3.2",
+    "mysql": "^2.18.1",
+    "axios": "^0.27.2",
+    "strapi-plugin-import-export-entries": "^1.14.1",
+    "strapi-plugin-passwordless": "latest",
+    "strapi-plugin-sitemap": "2.1.0-beta.0"
+  },
+  "author": {
+    "name": "KreskoLab"
+  },
+  "strapi": {
+    "uuid": "5c155544-2080-4a22-a169-25138f77c7b5"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

@@ -10,7 +10,12 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,vue,js}\"",
+    "dev:nuxt": "cd apps/nuxt3 && yarn dev",
+    "dev:strapi": "cd apps/strapi && yarn develop",
+    "build:types": "cd packages/shared-types && yarn build",
+    "build:nuxt": "cd apps/nuxt 3 && yarn generate",
+    "build:strapi": "cd apps/strapi && yarn build"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
@@ -20,6 +25,5 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
-  "packageManager": "yarn@1.22.1"
+  "dependencies": {}
 }
