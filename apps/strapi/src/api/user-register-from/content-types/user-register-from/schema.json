@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "user_register_froms",
+  "info": {
+    "singularName": "user-register-from",
+    "pluralName": "user-register-froms",
+    "displayName": "User register from"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "form": {
+      "type": "json"
+    }
+  }
+}
