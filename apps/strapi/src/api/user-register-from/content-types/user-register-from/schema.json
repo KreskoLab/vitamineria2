@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-register-from",
     "pluralName": "user-register-froms",
-    "displayName": "User register from"
+    "displayName": "User register form",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
