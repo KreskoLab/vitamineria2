@@ -1,3 +1,5 @@
+import { $fetch } from 'ohmyfetch'
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
 	modules: ['nuxt-icon', 'nuxt-windicss', '@nuxtjs/strapi', '@vueuse/nuxt', '@nuxt/image-edge'],
@@ -28,6 +30,15 @@ export default defineNuxtConfig({
 				{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
 			]
 		},
+	},
+
+	hooks: {
+		async 'nitro:config' (nitroConfig) {
+			if (nitroConfig.dev) { return }
+			
+			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
+			nitroConfig.prerender.routes.push(...res)
+		}
 	},
 
 	nitro: {
