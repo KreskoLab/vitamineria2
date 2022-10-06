@@ -22,10 +22,10 @@ const handleInput = () => {
 </script>
 
 <template>
-	<div class="relative w-full">
+	<div class="flex flex-col gap-y-1 h-max w-full">
 		<label
 			v-if="label"
-			class="absolute -top-8 left-0 text-lg"
+			class="text-lg"
 		>
 			{{ label }}
 		</label>
