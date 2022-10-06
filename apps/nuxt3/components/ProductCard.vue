@@ -4,18 +4,19 @@ const props = defineProps<{
 	slug: string,
 	category: string,
 	price: number,
-	message: string
-	image?: string,
+	message?: string
+	image: string,
 	height?: number,
 	width?: number,
 }>()
 
 const decimalPrice = computed(() => props.price.toFixed(2))
+const hasMassage = computed<boolean>(() => props.message && props.message.length ? true : false)
 </script>
 
 <template>
-	<article class="relative flex flex-col w-full h-full">
-		<NuxtLink :to="`/${category}/${slug}`">
+	<article class="relative w-full h-full">
+		<NuxtLink class="flex flex-col items-center" :to="`/${category}/${slug}`">
 			<NuxtImg 
 				:src="image"
 				:width="width"
@@ -38,7 +39,7 @@ const decimalPrice = computed(() => props.price.toFixed(2))
 		</NuxtLink>
 
 		<div 
-			v-if="message && message.length"
+			v-if="hasMassage"
 			class="absolute -right-3 top-2 sm:(top-5 right-0 w-42) transform rotate-20 bg-red-400 py-1 px-3"
 		>
 			<p class="text-sm lg:text-base font-medium text-center">
