@@ -27,7 +27,8 @@
     "axios": "^0.27.2",
     "strapi-plugin-import-export-entries": "^1.14.1",
     "strapi-plugin-passwordless": "latest",
-    "strapi-plugin-sitemap": "2.1.0-beta.0"
+    "strapi-plugin-sitemap": "2.1.0-beta.0",
+    "sitemap": "^7.1.1"
   },
   "author": {
     "name": "KreskoLab"

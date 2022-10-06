@@ -1,4 +1,6 @@
 import type { Subcategory } from 'shared-types';
+import { SitemapStream } from 'sitemap'
+import { createWriteStream } from 'fs'
 
 export default async function(ctx) {
 	const categories = await strapi.entityService.findMany('api::category.category', { populate: '*' }) as any[]
@@ -12,8 +14,29 @@ export default async function(ctx) {
 		return item.products.map(product => `/${category}/${item.slug}/${product.slug}`)
 	}).flat()
 
+	const categoriesSlugs = categories.map(item => `/${item.slug}`)
 
-	const res = [...productsSlugsWithSubcategory, ...productsSlugsWithCategory]
+	const res = [...productsSlugsWithSubcategory, ...productsSlugsWithCategory, ...categoriesSlugs]
+
+	try {
+		const hostname = process.env.MERCHANT_RETURN_URL
+		const sitemap = new SitemapStream({ hostname })
+
+		const outputDir = `${process.cwd()}/public`
+		const name = `${outputDir}/sitemap.xml`
+
+		const writeStream = createWriteStream(name);
+
+		sitemap.pipe(writeStream);
+
+		res.forEach(item => {
+			sitemap.write({ url: item,  changefreq: 'monthly',  priority: 0.5 })
+		})
+
+		sitemap.end();
+	} catch (error) {
+		console.log(error);
+	}
   
 	ctx.send(res)
 }
