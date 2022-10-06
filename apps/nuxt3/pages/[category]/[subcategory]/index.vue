@@ -5,7 +5,7 @@ import { subcategoryQuery } from '@/queries';
 const client = useStrapiClient()
 const route = useRoute()
 	
-const param = route.params['slug'] as string
+const param = route.params['subcategory'] as string
 const query = subcategoryQuery(param)
 	
 const { data: category } = await useAsyncData(
@@ -16,6 +16,8 @@ const { data: category } = await useAsyncData(
 		default: (): SubcategoryResponse => ({ data: [] })
 	}
 )
+
+const fullRoute = `${route.params.category}/${param}`
 	
 useHead({
 	title: category.value.data[0].attributes.name,
@@ -46,7 +48,7 @@ useHead({
 			<ProductCard 
 				v-for="product in category.data[0].attributes.products.data"
 				:key="product.id" 
-				:category="param"
+				:category="fullRoute"
 				:name="product.attributes.name" 
 				:slug="product.attributes.slug"
 				:message="product.attributes.message"

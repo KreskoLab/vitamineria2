@@ -52,7 +52,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 		@mouseleave="subcategoriesMenu.show = false"
 	>
 		<ul 
-			class="relative flex justify-between md:(justify-start gap-12) list-none w-full h-full"
+			class="relative flex justify-between lg:(justify-start gap-12) list-none w-full h-full"
 		>
 			<li
 				v-for="category in categories.data"
@@ -69,7 +69,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 			>
 				<NuxtLink
 					:to="`/${category.attributes.slug}`"
-					class="hidden lg:(flex items-center font-medium text-xl text-dark-100 h-full)"
+					class="hidden lg:(flex items-center text-dark-100 text-lg font-medium h-full) xl:text-xl"
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@mouseenter="getSubcategories(category.attributes.subcategories.data, category.attributes.slug)"
 				>
@@ -81,7 +81,9 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@click="showMenuOnMobile(category.attributes.slug, category.attributes.subcategories.data)"
 				>
-					{{ category.attributes.name }}
+					<span class="truncate overflow-hidden max-w-20">
+						{{ category.attributes.name }}
+					</span>
 				</div>
 			</li>
 		</ul>
@@ -100,7 +102,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					:key="subcategory.id"
 					class="text-sm sm:text-lg h-8 lg:h-10"
 				>
-					<NuxtLink :to="`/${subcategoriesMenu.category}/subcategory/${subcategory.attributes.slug}`">
+					<NuxtLink :to="`/${subcategoriesMenu.category}/${subcategory.attributes.slug}`">
 						{{ subcategory.attributes.name }}
 					</NuxtLink>
 				</li>
