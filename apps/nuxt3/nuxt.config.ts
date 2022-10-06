@@ -40,4 +40,11 @@ export default defineNuxtConfig({
 			nitroConfig.prerender.routes.push(...res)
 		}
 	},
+
+	nitro: {
+		prerender: {
+			crawlLinks: false,
+			ignore: ['/auth/', '/account/', '/account', '/order']
+		}
+	}
 })
