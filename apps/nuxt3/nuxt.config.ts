@@ -44,7 +44,7 @@ export default defineNuxtConfig({
 	nitro: {
 		prerender: {
 			crawlLinks: false,
-			ignore: ['/auth/', '/account/', '/account', '/order']
+			ignore: ['/auth/', '/account/', '/account', '/order', '/register']
 		}
 	}
 })
