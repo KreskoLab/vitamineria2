@@ -84,10 +84,9 @@ async function validate() {
 		>
 			<form
 				ref="form"
-				class="pt-2"
 			>
 				<fieldset 
-					class="grid grid-cols-2 gap-y-12 gap-x-8 mt-4 px-4 py-6" 
+					class="grid grid-cols-2 gap-y-6 gap-x-8 p-4" 
 					name="delivery"
 				>
 					<AppInput
@@ -107,7 +106,7 @@ async function validate() {
 
 				<fieldset
 					v-if="!user.email" 
-					class="px-4 pb-6 pt-2"
+					class="px-4 pb-6 py-2"
 				>
 					<AppCheckbox 
 						v-model="order.account"
@@ -116,7 +115,7 @@ async function validate() {
 				</fieldset>
 
 				<fieldset
-					class="grid grid-cols-2 gap-y-12 gap-x-8 border-t-2 border-gray-600 px-4 pt-10 pb-6" 
+					class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
 					name="delivery"
 				>
 					<AppSelect 
@@ -128,7 +127,7 @@ async function validate() {
 
 					<div 
 						v-if="isPostDelivery"
-						class="grid grid-cols-2 gap-y-12 gap-x-8 w-full col-span-full"
+						class="grid grid-cols-2 gap-y-6 gap-x-8 w-full col-span-full"
 					>
 						<AppInput
 							v-for="item in adressData.data.attributes.form"
@@ -147,7 +146,7 @@ async function validate() {
 				</fieldset>
 
 				<fieldset 
-					class="grid grid-cols-2 gap-y-12 gap-x-8 border-t-2 border-gray-600 px-4 pt-10 pb-6" 
+					class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
 					name="payment"
 				>
 					<AppSelect 
