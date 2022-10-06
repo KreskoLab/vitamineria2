@@ -21,7 +21,15 @@ export const categoryQuery = (param: string) => qs.stringify({
 		},
 		seo: {
 			fields: '*'
-		}
+		},
+		subcategories: {
+			fields: ['slug'],
+			populate: {
+				products: {
+					fields: ['slug']
+				}
+			}
+		},
 	},
 }, {
 	encodeValuesOnly: true,
