@@ -16,7 +16,11 @@ export default async function(ctx) {
 
 	const categoriesSlugs = categories.map(item => `/${item.slug}`)
 
-	const res = [...productsSlugsWithSubcategory, ...productsSlugsWithCategory, ...categoriesSlugs]
+	const categoriesSlugsWithSubcategories = categories.filter(category => category.subcategories.length).map(item => {
+		return item.subcategories.map(subcategory => `/${item.slug}/${subcategory.slug}`)
+	}).flat()
+
+	const res = [...productsSlugsWithSubcategory, ...productsSlugsWithCategory, ...categoriesSlugs, ...categoriesSlugsWithSubcategories]
 
 	try {
 		const hostname = process.env.MERCHANT_RETURN_URL
