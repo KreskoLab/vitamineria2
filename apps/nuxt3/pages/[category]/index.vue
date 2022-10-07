@@ -32,13 +32,9 @@ useHead({
 })
 
 function getCategory(product: string): string {
-	const hasSubcategories = category.value.data[0].attributes.subcategories.data.length
+	const subcategorySlug = category.value.data[0].attributes.subcategories.data.find(item => item.attributes.products.data.find(j => j.attributes?.slug === product))?.attributes.slug
 
-	if (hasSubcategories) {
-		const subcategorySlug = category.value.data[0].attributes.subcategories.data.find(item => item.attributes.products.data.find(j => j.attributes.slug === product)).attributes.slug
-		return `${category.value.data[0].attributes.slug}/${subcategorySlug}`
-	}
-
+	if (subcategorySlug) return `${category.value.data[0].attributes.slug}/${subcategorySlug}`
 	else return `${category.value.data[0].attributes.slug}/product`
 }
 </script>
