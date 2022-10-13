@@ -38,7 +38,7 @@ function selectVariant(variant: Variant) {
 
 <template>
 	<article class="flex flex-col h-[calc(100vh-7.5rem)] top-30 z-10 md:(fixed flex-row h-[calc(100vh-8rem)] top-32) bg-[#FCF7F1]">
-		<section class="relative flex flex-col h-full order-last md:(order-first min-w-156 max-w-156 overflow-y-auto)">
+		<section class="relative flex flex-col h-max order-last md:(h-full order-first min-w-156 max-w-156 overflow-y-auto) bg-[#FCF7F1]">
 			<div class="flex flex-col space-y-4 py-5 px-4 border-t-2 lg:(border-r-2 border-t-0) border-gray-600">
 				<div class="flex items-start justify-between">
 					<h1 class="text-2xl lg:text-4xl text-dark-400 font-medium tracking-wide">
@@ -135,11 +135,11 @@ function selectVariant(variant: Variant) {
 		</section>
 
 		<section class="w-full order-first md:(order-last overflow-y-auto h-full)">
-			<ul class="flex w-full overflow-x-auto snap snap-proximity snap-x md:(flex-none grid grid-cols-1) lg:(grid-cols-2)">
+			<ul class="hidden md:grid grid-cols-1 lg:grid-cols-2">
 				<li 
 					v-for="image in images.data" 
 					:key="image.id" 
-					class="lg:(border-b-2 border-r-2 border-gray-600) bg-[#F0F4F5] snap-start w-full flex-shrink-0 p-10"
+					class="lg:(border-b-2 border-r-2 border-gray-600) bg-[#F0F4F5] p-10"
 				>
 					<NuxtImg 
 						:src="image.attributes.hash + image.attributes.ext"
@@ -147,9 +147,12 @@ function selectVariant(variant: Variant) {
 						:height="image.attributes.height"
 						provider="cloudinary"
 						format="webp"
+						loading="lazy"
 					/>
 				</li>
 			</ul>
+
+			<ImageSlider :images="images.data" />
 		</section>
 	</article>
 </template>

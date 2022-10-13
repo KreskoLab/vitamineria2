@@ -14,6 +14,12 @@ export type Image = {
 			ext: string
 			width: number
 			height: number
+		},
+		medium: {
+			hash: string
+			ext: string
+			width: number
+			height: number
 		}
 	}
 }
