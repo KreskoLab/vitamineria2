@@ -1,5 +1,5 @@
 <template>
-	<Splide :options="options">
+	<Splide class="block sm:hidden" :options="options">
 		<SplideSlide v-for="image in images" :key="image.attributes.hash">
 			<NuxtImg 
 				:src="image.attributes.formats.medium.hash + image.attributes.formats.medium.ext"
