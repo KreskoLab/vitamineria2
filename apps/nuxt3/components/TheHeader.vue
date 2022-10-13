@@ -21,7 +21,7 @@
 				</NuxtLink>
 			</div>
 
-			<nav class="flex flex-wrap w-full mt-1.5 order-last lg:(h-full items-center w-max mt-0)">
+			<nav class="flex flex-wrap w-full order-last h-8 lg:(h-full items-center w-max h-full)">
 				<CategoriesList />
 			</nav>
 

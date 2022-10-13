@@ -52,7 +52,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 		@mouseleave="subcategoriesMenu.show = false"
 	>
 		<ul 
-			class="relative flex justify-between lg:(justify-start gap-12) list-none w-full h-full"
+			class="relative flex justify-between lg:(justify-start gap-12 space-x-0) h-full overflow-x-auto overflow-y-hidden whitespace-nowrap space-x-6"
 		>
 			<li
 				v-for="category in categories.data"
@@ -61,8 +61,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					group
 					relative 
 					h-full 
-					cursor-pointer 
-					after:(content-DEFAULT absolute top-5 lg:top-14 w-0 h-[2px] bg-yellow-500 transition-all duration-500)
+					after:(content-DEFAULT absolute top-7 lg:top-14 w-0 h-[2px] bg-yellow-500 transition-all duration-500)
 					after:hover:(bg-teal-300 w-full)
 				"
 				:class="{ 'after:(!w-full)': isActive(category.attributes.slug) }"
@@ -81,7 +80,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@click="showMenuOnMobile(category.attributes.slug, category.attributes.subcategories.data)"
 				>
-					<span class="truncate overflow-hidden max-w-20">
+					<span class="">
 						{{ category.attributes.name }}
 					</span>
 				</div>
