@@ -7,7 +7,7 @@ import type { Variant } from '@/types';
 const client = useStrapiClient()
 const route = useRoute()
 
-const param = route.params.product as string
+const param = route.params.slug as string
 
 const { data: response } = await client<ProductResponse>(`products?filters[slug][$eq]=${param}&populate=*`)
 const { name, images, prices, brief, in_stock, ...rest } = response[0].attributes
