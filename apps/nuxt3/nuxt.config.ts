@@ -2,7 +2,7 @@ import { $fetch } from 'ohmyfetch'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-	modules: ['nuxt-icon', 'nuxt-windicss', '@nuxtjs/strapi', '@vueuse/nuxt', '@nuxt/image-edge'],
+	modules: ['nuxt-icon', 'nuxt-windicss', '@nuxtjs/strapi', '@vueuse/nuxt', '@nuxt/image-edge', '@nuxtjs/partytown'],
 
 	css: ['@/assets/main.css'],
 
@@ -23,8 +23,8 @@ export default defineNuxtConfig({
 				lang: 'uk'
 			},
 			script: [
-				{ children: process.env.GA_SCRIPT },
-				{ src: process.env.GA_URL, hid: 'gtm', async: true },
+				{ children: process.env.GA_SCRIPT, type: 'text/partytown' },
+				{ src: process.env.GA_URL, hid: 'gtm', async: true, type: 'text/partytown' },
 			],
 			link: [
 				{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
@@ -46,5 +46,26 @@ export default defineNuxtConfig({
 			crawlLinks: false,
 			ignore: ['/auth/', '/account/', '/account', '/order', '/register']
 		}
-	}
+	},
+
+	partytown: {
+		forward: ['dataLayer.push'],
+		resolveUrl: `function (url, location, elementType) {
+			const proxyElementTypes = ['script', 'iframe'];
+
+			const proxyParams = {
+				address: 'https://cdn.builder.codes/api/v1/js-proxy',
+				apiKey: ${process.env.PROXY_KEY},
+			};
+	
+			if (proxyElementTypes.includes(elementType)) {
+				const proxyUrl = new URL(proxyParams.address);
+				proxyUrl.searchParams.append('url', url.href);
+				proxyUrl.searchParams.append('apiKey', proxyParams.apiKey);
+				return proxyUrl;
+			}
+	
+			return url;
+		},`
+	},
 })
