@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 
 			const proxyParams = {
 				address: 'https://cdn.builder.codes/api/v1/js-proxy',
-				apiKey: ${process.env.PROXY_KEY},
+				apiKey: '${process.env.PROXY_KEY}',
 			};
 	
 			if (proxyElementTypes.includes(elementType)) {
