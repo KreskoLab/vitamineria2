@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { Product } from '@/types';
 
-defineEmits<{
-	(event: 'pay'): void
-}>()
+const tab = useCartTab()
 
 const props = defineProps<{
 	products: Product[]
@@ -20,6 +18,13 @@ watch(props.products, (val, oldVal) => {
 
 async function removeProduct(id: number, weight: string) {
 	await removeFromCart({ id, weight })
+}
+
+function toOrder() {
+	tab.value = {
+		name: 'Адреса',
+		value: 'address'
+	}
 }
 </script>
 
@@ -82,7 +87,7 @@ async function removeProduct(id: number, weight: string) {
 
 				<button
 					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-green-200"
-					@click="$emit('pay')" 
+					@click="toOrder()" 
 				>
 					Оформити
 				</button>
