@@ -2,6 +2,11 @@ export default {
 	variants: {
 		scrollbar: ['rounded']
 	},
+	extract: {
+		include: [
+			'./**/*.{vue,js,ts}',
+		],
+	},
 	plugins: [
 		require('@windicss/plugin-scrollbar'),
 		require('windicss/plugin/scroll-snap'),
