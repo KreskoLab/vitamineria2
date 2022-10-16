@@ -61,7 +61,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					group
 					relative 
 					h-full 
-					after:(content-DEFAULT absolute top-7 lg:top-14 w-0 h-[2px] bg-yellow-500 transition-all duration-500)
+					after:(content-DEFAULT absolute top-7 lg:top-14 w-0 h-2px bg-yellow-500 transition-all duration-500)
 					after:hover:(bg-teal-300 w-full)
 				"
 				:class="{ 'after:(!w-full)': isActive(category.attributes.slug) }"
@@ -109,3 +109,9 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 		</transition>
 	</div>
 </template>
+
+<style scoped>
+::-webkit-scrollbar {
+	display: none;
+}
+</style>

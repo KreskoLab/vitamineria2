@@ -6,17 +6,15 @@ await Promise.all([fetchCartProducts(), useFetchUser()])
 </script>
 
 <template>
-	<div class="min-h-screen bg-stone-100 min-w-[350px]">
+	<div class="min-h-screen bg-stone-100">
 		<TheFooter />
-
 		<TheHeader />
 
-		<TheCart 
+		<LazyTheCart 
 			v-if="cart" 
-			@close="cart = false" 
 		/>
 
-		<LoginModal
+		<LazyLoginModal
 			v-if="login"
 			@close="login = false"
 		/>
@@ -24,7 +22,7 @@ await Promise.all([fetchCartProducts(), useFetchUser()])
 		<NuxtLoadingIndicator />
 
 		<main 
-			class="container mx-auto max-w-screen-2xl overflow-x-hidden pt-30 lg:pt-32">
+			class="overflow-x-hidden pt-30 lg:pt-32">
 			<NuxtPage />
 		</main>
 	</div>
