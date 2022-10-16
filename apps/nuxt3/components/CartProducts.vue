@@ -9,10 +9,7 @@ const props = defineProps<{
 	products: Product[]
 }>()
 
-const productsPrice = computed<number>(() => {
-	return props.products.reduce((acc, cv) => acc + cv.prices[0].variants[0].price * cv.count, 0)
-}) 
-
+const productsPrice = computed<number>(() => props.products.reduce((acc, cv) => acc + cv.prices[0].variants[0].price * cv.count, 0))
 const cartFull = computed<boolean>(() => props.products.length ? true : false)
 
 watch(props.products, (val, oldVal) => {
@@ -70,9 +67,7 @@ async function removeProduct(id: number, weight: string) {
 				</li>
 			</ul>
 
-			<p v-else class="flex justify-center items-center text-2xl font-medium h-full">
-				Кошик порожній
-			</p>
+			<CartEmpty v-else />
 		</div>
 
 		<section 

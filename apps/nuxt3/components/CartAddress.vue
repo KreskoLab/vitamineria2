@@ -3,10 +3,6 @@ import { OrderInfo, PAYMENT, POST } from 'shared-types';
 import { delivery, payments } from '@/content';
 import { FormResponse } from '@/interfaces';
 
-defineProps<{
-	full: boolean
-}>()
-
 const { find } = useStrapi4()
 const client = useStrapiClient()
 
@@ -79,88 +75,83 @@ async function validate() {
 
 <template>
 	<div class="flex flex-col justify-between h-full overflow-y-auto">
-		<div 
-			v-if="full" 
+		<form
+			ref="form"
 		>
-			<form
-				ref="form"
+			<fieldset 
+				class="grid grid-cols-2 gap-y-6 gap-x-8 p-4" 
+				name="delivery"
 			>
-				<fieldset 
-					class="grid grid-cols-2 gap-y-6 gap-x-8 p-4" 
-					name="delivery"
+				<AppInput
+					v-for="item in formData.data.attributes.form"
+					:key="item.label"
+					v-model="order[item.value]"
+					:label="item.label"
+					:class="[item.full ? 'col-span-full' : 'col-span-1']"
+					:type="item.type"
+					:required="item.required"
+					:pattern="item.pattern"
+					:message="item.message"
+					:placeholder="item.placeholder"
+					@input="order[item.value] = $event"
+				/>
+			</fieldset>
+
+			<fieldset
+				v-if="!user.email" 
+				class="px-4 pb-6 py-2"
+			>
+				<AppCheckbox 
+					v-model="order.account"
+					label="Створити аккаунт"
+				/>
+			</fieldset>
+
+			<fieldset
+				class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
+				name="delivery"
+			>
+				<AppSelect 
+					v-model="order.post.name"
+					class="col-span-full"
+					label="Доставка"
+					:options="delivery"
+				/>
+
+				<div 
+					v-if="isPostDelivery"
+					class="grid grid-cols-2 gap-y-6 gap-x-8 w-full col-span-full"
 				>
 					<AppInput
-						v-for="item in formData.data.attributes.form"
+						v-for="item in adressData.data.attributes.form"
 						:key="item.label"
-						v-model="order[item.value]"
-						:label="item.label"
+						v-model="order.post[item.value]"
 						:class="[item.full ? 'col-span-full' : 'col-span-1']"
+						:label="item.label"
 						:type="item.type"
 						:required="item.required"
 						:pattern="item.pattern"
 						:message="item.message"
 						:placeholder="item.placeholder"
-						@input="order[item.value] = $event"
+						@input="order.post[item.value] = $event"
 					/>
-				</fieldset>
+				</div>
+			</fieldset>
 
-				<fieldset
-					v-if="!user.email" 
-					class="px-4 pb-6 py-2"
-				>
-					<AppCheckbox 
-						v-model="order.account"
-						label="Створити аккаунт"
-					/>
-				</fieldset>
-
-				<fieldset
-					class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
-					name="delivery"
-				>
-					<AppSelect 
-						v-model="order.post.name"
-						class="col-span-full"
-						label="Доставка"
-						:options="delivery"
-					/>
-
-					<div 
-						v-if="isPostDelivery"
-						class="grid grid-cols-2 gap-y-6 gap-x-8 w-full col-span-full"
-					>
-						<AppInput
-							v-for="item in adressData.data.attributes.form"
-							:key="item.label"
-							v-model="order.post[item.value]"
-							:class="[item.full ? 'col-span-full' : 'col-span-1']"
-							:label="item.label"
-							:type="item.type"
-							:required="item.required"
-							:pattern="item.pattern"
-							:message="item.message"
-							:placeholder="item.placeholder"
-							@input="order.post[item.value] = $event"
-						/>
-					</div>
-				</fieldset>
-
-				<fieldset 
-					class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
-					name="payment"
-				>
-					<AppSelect 
-						v-model="order.payment"
-						class="col-span-full"
-						label="Спосіб оплати"
-						:options="payments"
-					/>
-				</fieldset>
-			</form>
-		</div>
+			<fieldset 
+				class="grid grid-cols-2 gap-y-6 gap-x-8 border-t-2 border-gray-600 px-4 pt-12 pb-8" 
+				name="payment"
+			>
+				<AppSelect 
+					v-model="order.payment"
+					class="col-span-full"
+					label="Спосіб оплати"
+					:options="payments"
+				/>
+			</fieldset>
+		</form>
 
 		<section 
-			v-if="full"
 			class="border-t-2 border-gray-600"
 		>
 			<div class="flex flex-col space-y-6 px-4 py-6">
