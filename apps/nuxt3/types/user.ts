@@ -9,6 +9,7 @@ export type User = {
 	region: string
 	city: string
 	postcode: string
+	password: string
 	cart: {
 		id: number
 		count: number,
