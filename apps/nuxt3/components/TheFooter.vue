@@ -5,8 +5,12 @@
 				<Icon name="tabler-phone" />
 				<span>+380 63 24 53 347</span>
 			</div>
+
+			<NuxtLink class="font-semibold text-xl" to="/cooperation">
+				🤝 Співпраця
+			</NuxtLink>
 		
-			<div class="flex items-center space-x-1 lg:space-x-2">
+			<div class="hidden lg:(flex items-center space-x-2)">
 				<Icon name="tabler-mail" />
 				<span>reply@vitamineria.com.ua</span>
 			</div>
