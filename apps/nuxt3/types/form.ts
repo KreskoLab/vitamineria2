@@ -8,5 +8,6 @@ export type Form = {
 	required: true,
 	message: string,
 	pattern?: string,
-	placeholder?: string
+	placeholder?: string,
+	minlength?: number,
 }

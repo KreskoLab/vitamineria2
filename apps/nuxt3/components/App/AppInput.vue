@@ -1,28 +1,36 @@
 <script setup lang="ts">
 defineProps<{
-	label?: string
+	label?: string,
 	modelValue?: string,
 	type?: string,
 	placeholder?: string
 	required?: boolean,
 	pattern?: string,
-	message?: string
+	message?: string,
+	password?: boolean,
+	minlength?: number,
 }>()
 
 const emit = defineEmits<{
-	(event: 'input', data: string): void
+	(event: 'update:modelValue', data: string): void
 }>()
 
 const input = ref<HTMLInputElement | null>(null)
+const showPass = ref<boolean>(false)
 
 const handleInput = () => {
 	input.value.setCustomValidity('')
-	emit('input', input.value.value)
+	emit('update:modelValue', input.value.value)
+}
+
+function toggle(): void {
+	showPass.value ? input.value.type = 'password' : input.value.type = 'text'
+	showPass.value = !showPass.value
 }
 </script>
 
 <template>
-	<div class="flex flex-col gap-y-1 h-max w-full">
+	<div class="relative flex flex-col gap-y-1 h-max w-full">
 		<label
 			v-if="label"
 			class="text-lg"
@@ -35,11 +43,17 @@ const handleInput = () => {
 			:placeholder="placeholder"
 			:required="required"
 			:value="modelValue"
+			:minlength="minlength || 0"
 			:type="type || 'text'"
 			:pattern="pattern"
 			@input="handleInput"
 			@invalid="input.setCustomValidity(message)"
 		/>
+
+		<div v-if="type === 'password'" class="absolute right-4 top-[55%] text-gray-600 cursor-pointer" @click="toggle()">
+			<Icon v-if="showPass" name="tabler:eye-off" class="w-5 h-5" />
+			<Icon v-else name="tabler:eye" class="w-5 h-5" />
+		</div>
 	</div>
 </template>
 
