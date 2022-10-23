@@ -31,6 +31,12 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
 	},
 	{
+		name: 'Злаково-горіхове печиво 100г =',
+		price: 52,
+		oldPrice: 65,
+		image: 'SMALL_photo1666351091_0e4b3b08fb.jpg',
+	},
+	{
 		name: 'Фріпси в асортименті',
 		image: 'SMALL_photo1665581014_1_46b04cc937.jpeg',
 	}
