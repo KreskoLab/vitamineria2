@@ -75,15 +75,13 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					{{ category.attributes.name }}
 				</NuxtLink>
 
-				<div
-					class="flex items-center text-sm text-dark-100 font-medium h-full lg:hidden"
+				<span
+					class="flex items-center text-sm text-dark-100 font-medium cursor-pointer h-full lg:hidden"
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@click="showMenuOnMobile(category.attributes.slug, category.attributes.subcategories.data)"
 				>
-					<span class="">
-						{{ category.attributes.name }}
-					</span>
-				</div>
+					{{ category.attributes.name }}
+				</span>
 			</li>
 		</ul>
 
