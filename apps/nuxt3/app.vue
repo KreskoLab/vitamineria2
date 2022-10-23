@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const cart = useCart()
 const login = useLogin()
+const resetPassword = useResetPassword()
 
 await Promise.all([fetchCartProducts(), useFetchUser()])
 </script>
@@ -17,6 +18,12 @@ await Promise.all([fetchCartProducts(), useFetchUser()])
 		<LazyLoginModal
 			v-if="login"
 			@close="login = false"
+			@reset-password="resetPassword = true"
+		/>
+
+		<LazyResetPasswordModal
+			v-if="resetPassword"
+			@close="resetPassword = false"
 		/>
 
 		<NuxtLoadingIndicator />

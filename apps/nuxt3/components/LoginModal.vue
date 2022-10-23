@@ -1,116 +1,128 @@
 <script setup lang="ts">
-defineEmits<{
-	(event: 'close'): void
+import { AppModal } from '#components'
+
+const emit = defineEmits<{
+	(event: 'resetPassword'): void
 }>()
 
 const loginModal = reactive({
-	show: false,
-	send: false,
+	reset: false,
 	email: '',
+	password: '',
 })
 
-const client = useStrapiClient()
+const modal = ref<InstanceType<typeof AppModal> | null>(null)
 
-async function logIn() {
-	
+const { login } = useStrapiAuth()
+
+async function auth() {
+	try {
+		await login({ identifier: loginModal.email, password: loginModal.password })
+	} catch (error) {
+		if (error.error.status === 400) {
+			useNotification('Неправильний email або пароль', 'error')
+		}
+
+		if (error.error.status === 500) {
+			useNotification('Помилка серверу', 'error')
+		}
+	}
 }
 
-onMounted(() => (loginModal.show = true))
+function resetPassword() {
+	loginModal.reset = true
+	modal.value.toggle()
+	emit('resetPassword')
+}
 </script>
 
 <template>
-	<Teleport to="body">
+	<AppModal ref="modal" :left-transition="!loginModal.reset">
 		<div
-			class="flex justify-center items-center fixed top-0 left-0 h-full w-full bg-dark-600/60 transition-all duration-150 ease-in-out" style="z-index: 999"
+			class="flex flex-col relative w-full h-full border-2 border-gray-600 bg-light-50"
 		>
-			<Transition
-				enter-active-class="animate-animated animate-faster animate-fadeInUp"
-				leave-active-class="animate-animated animate-faster animate-fadeOutDown"
-				@after-leave="$emit('close')"
-			>
-				<dialog
-					v-if="loginModal.show"
-					class="w-[90%] h-[320px] md:w-[60%] lg:(w-[480px] h-[370px]) bg-gradient-19 p-4"
-					open
+			<header class="flex items-center border-gray-600 border-b-2 w-full h-16 px-6">
+				<img
+					width="248"
+					height="248"
+					src="@/assets/logo.svg"
+					class="ml-4 lg:ml-16"
+					alt="logo"
+				/>
+
+				<button
+					class="flex items-center justify-center outline-transparent ml-auto"
+					@click="modal.toggle()"
 				>
-					<div
-						class="relative w-full h-full border-2 border-gray-600 bg-light-50"
-					>
-						<header class="flex items-center border-gray-600 border-b-2 w-full h-max px-6">
-							<img
-								width="248"
-								height="248"
-								src="@/assets/logo.svg"
-								class="mx-auto"
-								alt="logo"
-							/>
+					<Icon
+						name="tabler:x"
+						class="w-5 h-5 text-gray-400 hover:text-red-600 transition duration-150"
+					/>
+				</button>
+			</header>
 
-							<button
-								class="flex items-center justify-center outline-transparent ml-auto"
-								@click="loginModal.show = false"
-							>
-								<Icon
-									name="tabler:x"
-									class="w-5 h-5 text-gray-400 hover:text-red-600 transition duration-150"
-								/>
-							</button>
-						</header>
+			<form 
+				class="flex flex-col items-center justify-center"
+				@submit.prevent="auth()"
+			>
+				<div class="flex flex-col space-y-6 sm:space-y-4 w-full px-6 pt-3 pb-5 h-full">
+					<AppInput 
+						v-model="loginModal.email"
+						label="Email" 
+						placeholder="Ваш email"
+						message="Введіть email адресу"
+						required
+						:minlength="6"
+					/>
 
-						<form 
-							class="mt-8"
-							@submit.prevent="logIn()"
+					<AppInput 
+						v-model="loginModal.password"
+						label="Пароль" 
+						placeholder="Ваш пароль"
+						message="Введіть ваш пароль"
+						type="password"
+						required
+						:minlength="6"
+					/>
+
+					<div class="flex items-center justify-between">
+						<span class="cursor-pointer w-64 text-xs sm:text-sm underline underline-current underline-offset-4" @click="resetPassword()">
+							Забули пароль ?
+						</span>
+
+						<button
+							class="auth-button bg-green-200 py-1.5"
 						>
-							<div class="flex flex-col items-center space-y-6 px-6">
-								<template v-if="!loginModal.send">
-									<div class="flex flex-col space-y-12 w-full">
-										<AppInput 
-											label="Email"
-											placeholder="Ваш email" 
-											required
-											message="Введіть email адресу"
-											@input="loginModal.email = $event"
-										/>
-
-										<AppInput 
-											label="Пароль"
-											placeholder="Ваш пароль" 
-											required
-											message="Введіть ваш пароль"
-											@input="loginModal.email = $event"
-										/>
-									</div>
-							
-									<button
-										class="hover:bg-green-200 auth-button"
-									>
-										<span class="text-lg font-medium mx-auto">
-											Увійти
-										</span>
-									</button>
-								</template>
-
-								<template v-else>
-									<p class="text-lg">
-										На вашу пошту відправлено лист
-									</p>
-								</template>
-							</div>
-						</form>
+							<span class="text-sm sm:text-base font-medium mx-auto">
+								Увійти
+							</span>
+						</button>
 					</div>
-				</dialog>
-			</Transition>
+				</div>
+			</form>
+
+			<footer class="flex items-center justify-between border-t-2 border-gray-600 w-full px-6 py-3">
+				<span class="uppercase text-xs sm:text-sm">
+					Немаєте аккаунту ?
+				</span>
+
+				<NuxtLink
+					to="/register"
+					class="hover:bg-green-200 auth-button !w-max lg:!px-4"
+					@click="modal.toggle()"
+				>
+					<span class="text-sm mx-auto">
+						Зареєструватися
+					</span>
+				</NuxtLink>
+			</footer>
 		</div>
-	</Teleport>
+	</AppModal>
 </template>
 
 <style scoped>
-.fancy-border {
-	border: 5px solid;
-	border-image: linear-gradient(to left, #10b981, #ec4899) 1;
-}
-
 .auth-button {
-	@apply flex items-center border-2 border-dark-50 py-2 px-3 w-10/12
+	@apply flex items-center border border-dark-50 px-2 w-full rounded-full
   transition duration-200 ease-in-out
   hover:ring-transparent
   ring-[1px] ring-dark-200 ring-offset-2;
