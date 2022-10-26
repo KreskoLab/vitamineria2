@@ -13,7 +13,7 @@ onClickOutside(button, () =>  active.value = false)
 	<div class="relative h-full w-full">
 		<button 
 			ref="button"
-			class="h-full transition-all duration-400 w-full truncate overflow-hidden appearance-none" 
+			class="h-full transition-all duration-400 w-full truncate appearance-none" 
 			:class="{ '!border-gray-600': active }"
 			@click="active = !active"
 		>
