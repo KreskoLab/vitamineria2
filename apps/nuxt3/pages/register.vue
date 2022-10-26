@@ -70,3 +70,12 @@ useHead({
 		</AppContainer>
 	</div>
 </template>
+
+<style>
+.auth-button {
+	@apply flex items-center border border-dark-50 h-8 py-1 px-4 w-full sm:w-max rounded-full
+	transition duration-200 ease-in-out
+	hover:ring-transparent hover:bg-orange-200
+	ring-[1px] ring-dark-200 ring-offset-2;
+}
+</style>
