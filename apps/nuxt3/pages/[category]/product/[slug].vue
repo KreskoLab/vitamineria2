@@ -64,14 +64,14 @@ function selectVariant(variant: Variant) {
 				</div>
 	
 				<div v-if="in_stock" class="flex items-center bg-light-50">
-					<AppDropdown class="flex-grow border-t-2 border-r-2 border-gray-600 py-5">
+					<AppDropdown class="w-96 lg:(flex-grow h-20) border-t-2 border-r-2 border-gray-600">
 						<template #default>
 							<div class="flex items-center justify-evenly">
 								<span class="text-center text-lg">
 									{{ cartProduct.variant }}
 								</span>
 	
-								<Icon name="tabler:chevron-down" class="w-6 h-6" />
+								<Icon name="tabler:chevron-down" class="w-6 h-6 flex-shrink-0" />
 							</div>
 						</template>
 	
@@ -87,7 +87,7 @@ function selectVariant(variant: Variant) {
 					</AppDropdown>
 	
 					<button 
-						class="appearance-none bg-[#1D7F75] py-5 w-64 font-semibold text-xl text-[#FCF7F1] border-t-2 lg:(border-r-2 border-t-2) border-gray-600" 
+						class="appearance-none bg-[#1D7F75] h-full w-64 font-semibold text-xl text-[#FCF7F1] border-t-2 lg:(border-r-2 border-t-2) border-gray-600" 
 						@click="add()"
 					>
 						В кошик
