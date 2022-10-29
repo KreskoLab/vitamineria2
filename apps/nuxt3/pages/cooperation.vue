@@ -37,6 +37,18 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo1666351091_0e4b3b08fb.jpg',
 	},
 	{
+		name: 'Гранола "take away" 125г =',
+		price: 36,
+		oldPrice: 45,
+		image: 'SMALL_photo1667043252_3_564d287481.jpg',
+	},
+	{
+		name: 'Гранола медова з горіхами та сухофруктами в крафт-пакеті 300г = ',
+		price: 76,
+		oldPrice: 95,
+		image: 'SMALL_photo1666713196_100fd04472.jpg',
+	},
+	{
 		name: 'Фріпси в асортименті',
 		image: 'SMALL_photo1665581014_1_46b04cc937.jpeg',
 	}
