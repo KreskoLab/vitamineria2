@@ -25,6 +25,7 @@ export default defineNuxtConfig({
 			script: [
 				{ children: process.env.GA_SCRIPT, type: 'text/partytown' },
 				{ src: process.env.GA_URL, hid: 'gtm', async: true, type: 'text/partytown' },
+				{ children: process.env.PIXEL_SCRIPT, type: 'text/partytown', }
 			],
 			link: [
 				{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
@@ -44,12 +45,12 @@ export default defineNuxtConfig({
 	nitro: {
 		prerender: {
 			crawlLinks: false,
-			ignore: ['/auth/', '/account/', '/account', '/order', '/register']
+			ignore: ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password']
 		}
 	},
 
 	partytown: {
-		forward: ['dataLayer.push'],
+		forward: ['dataLayer.push', 'fbq'],
 		resolveUrl: `function (url, location, elementType) {
 			const proxyElementTypes = ['script', 'iframe'];
 
