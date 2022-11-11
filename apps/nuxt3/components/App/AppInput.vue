@@ -18,9 +18,9 @@ const emit = defineEmits<{
 const input = ref<HTMLInputElement | null>(null)
 const showPass = ref<boolean>(false)
 
-const handleInput = () => {
+const handleInput = (e: Event) => {
 	input.value.setCustomValidity('')
-	emit('update:modelValue', input.value.value)
+	emit('update:modelValue', (e.target as HTMLInputElement).value)
 }
 
 function toggle(): void {
@@ -46,7 +46,7 @@ function toggle(): void {
 			:minlength="minlength || 0"
 			:type="type || 'text'"
 			:pattern="pattern"
-			@input="handleInput"
+			@input="handleInput($event)"
 			@invalid="input.setCustomValidity(message)"
 		/>
 
