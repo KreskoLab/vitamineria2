@@ -43,10 +43,16 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo1667043252_3_564d287481.jpg',
 	},
 	{
-		name: 'Гранола медова з горіхами та сухофруктами в крафт-пакеті 300г = ',
+		name: 'Гранола в асортименті 300г = ',
 		price: 76,
 		oldPrice: 95,
 		image: 'SMALL_photo1666713196_100fd04472.jpg',
+	},
+	{
+		name: 'Новорічний набір Ялинка 1шт = ',
+		price: 52,
+		oldPrice: 65,
+		image: 'SMALL_photo1668186659_f34552b710.jpg',
 	},
 	{
 		name: 'Фріпси в асортименті',
