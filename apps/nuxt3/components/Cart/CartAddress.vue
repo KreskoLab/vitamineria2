@@ -132,7 +132,6 @@ async function validate() {
 						:pattern="item.pattern"
 						:message="item.message"
 						:placeholder="item.placeholder"
-						@input="order.post[item.value] = $event"
 					/>
 				</div>
 			</fieldset>
