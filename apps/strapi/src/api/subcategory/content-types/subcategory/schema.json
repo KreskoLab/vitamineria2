@@ -31,6 +31,13 @@
     "priority": {
       "type": "integer",
       "default": 0
+    },
+    "sort": {
+      "type": "enumeration",
+      "enum": [
+        "low",
+        "high"
+      ]
     }
   }
 }

@@ -1,7 +1,7 @@
 import qs from 'qs'
 
 export const subcategoryQuery = (param: string) => qs.stringify({
-	fields: ['name', 'slug'],
+	fields: ['name', 'slug', 'sort'],
 	filters: {
 		slug: {
 			$eq: param
