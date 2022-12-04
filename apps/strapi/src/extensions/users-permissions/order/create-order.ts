@@ -2,6 +2,7 @@ import { Context } from 'koa'
 import { Order, PAYMENT, POST, Product, User, CartProduct, OrderInfo } from 'shared-types'
 import { hashMerchantSecret, sendEmial } from '../utils';
 import { getService } from '@strapi/plugin-users-permissions/server/utils';
+import { notification } from './telegram';
 import axios from 'axios';
 
 interface RequestBody {
@@ -22,6 +23,9 @@ export default async function(ctx: Context & RequestBody) {
 	const { order, cart } = ctx.request.body  
 		    
 	try {
+
+		await notification();
+
 		const { id } = ctx.state.user;    
 		const isPost = order.post.name === POST.NOVAPOSHTA || order.post.name === POST.UKRPOSHTA
 

@@ -10,24 +10,25 @@
     "strapi": "strapi"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.5",
+    "@types/node": "^18.8.2",
     "eslint": "^8.0.1",
     "eslint-config-custom": "*",
     "prettier-config-custom": "*",
-    "shared-types": "*",
-    "@types/node": "^18.7.18",
-    "@types/koa": "^2.13.5"
+    "shared-types": "*"
   },
   "dependencies": {
-    "@strapi/strapi": "4.3.2",
-    "@strapi/plugin-users-permissions": "4.3.2",
     "@strapi/plugin-i18n": "4.3.2",
+    "@strapi/plugin-users-permissions": "4.3.2",
     "@strapi/provider-email-sendgrid": "^4.3.2",
     "@strapi/provider-upload-cloudinary": "^4.3.2",
-    "mysql": "^2.18.1",
+    "@strapi/strapi": "4.3.2",
     "axios": "^0.27.2",
+    "mysql": "^2.18.1",
+    "sitemap": "^7.1.1",
     "strapi-plugin-import-export-entries": "^1.14.1",
     "strapi-plugin-passwordless": "latest",
-    "sitemap": "^7.1.1"
+    "telegraf": "^4.11.2"
   },
   "author": {
     "name": "KreskoLab"
