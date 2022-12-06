@@ -2,7 +2,8 @@ import { Context } from 'koa'
 import { Order, PAYMENT, POST, Product, User, CartProduct, OrderInfo } from 'shared-types'
 import { hashMerchantSecret, sendEmial } from '../utils';
 import { getService } from '@strapi/plugin-users-permissions/server/utils';
-import { notification } from './telegram';
+import { notification } from './telegram';4
+import { randomUUID } from 'crypto'
 import axios from 'axios';
 
 interface RequestBody {
@@ -21,11 +22,14 @@ interface RequestBody {
 
 export default async function(ctx: Context & RequestBody) {
 	const { order, cart } = ctx.request.body  
+
+	try {
+		await notification();
+	} catch (error) {
+		console.log(error);
+	}
 		    
 	try {
-
-		await notification();
-
 		const { id } = ctx.state.user;    
 		const isPost = order.post.name === POST.NOVAPOSHTA || order.post.name === POST.UKRPOSHTA
 
@@ -45,38 +49,42 @@ export default async function(ctx: Context & RequestBody) {
 		console.log(error);
 	}
         
-	if (order.account) {
-		const userExist = await strapi.db.query('plugin::users-permissions.user').findOne({
-			where: { email: order.email }
-		}) as User     
-
-		if (!userExist) {
-			await strapi.plugins['users-permissions'].services.user.add({
-				blocked: false,
-				confirmed: true, 
-				username: `${order.name} ${order.surname}`,
-				email: order.email,
-				name: order.name,
-				surname: order.surname,
-				phone: order.phone,
-				region: order.post.region || '',
-				city: order.post.city || '',
-				postcode: order.post.code || '',
-				password: 'secretpassword',
-				provider: 'local',
-				created_by: 1,
-				updated_by: 1,
-				role: 1
-			});
-
-			const helloMsg = `
-          Вітаємо в родині Вітамінерія!
-          Ваш акаунт ${order.email}
-          Приємних покупок!
-        `
-
-			await sendEmial(order.email, 'Реєстрація', helloMsg)
-		} else ctx.send('error');
+	try {
+		if (order.account) {
+			const userExist = await strapi.db.query('plugin::users-permissions.user').findOne({
+				where: { email: order.email }
+			}) as User     
+	
+			if (!userExist) {
+				await strapi.plugins['users-permissions'].services.user.add({
+					blocked: false,
+					confirmed: true, 
+					username: `${order.name} ${order.surname}`,
+					email: order.email,
+					name: order.name,
+					surname: order.surname,
+					phone: order.phone,
+					region: order.post.region || '',
+					city: order.post.city || '',
+					postcode: order.post.code || '',
+					password: 'secretpassword',
+					provider: 'local',
+					created_by: 1,
+					updated_by: 1,
+					role: 1
+				});
+	
+				const helloMsg = `
+						Вітаємо в родині Вітамінерія!
+						Ваш акаунт ${order.email}
+						Приємних покупок!
+					`
+	
+				await sendEmial(order.email, 'Реєстрація', helloMsg)
+			} else ctx.send('error');
+		}
+	} catch (error) {
+		console.log(error);
 	}
 
 	const ordersService = strapi.services['api::order.order']
@@ -114,7 +122,8 @@ export default async function(ctx: Context & RequestBody) {
 			products: orderProducts, 
 			date: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kiev' }),
 			publishedAt: new Date(),
-			sum: sum
+			sum: sum,
+			uuid: randomUUID({ disableEntropyCache: true }),
 		}
 	}) as Order   
 
@@ -129,7 +138,7 @@ export default async function(ctx: Context & RequestBody) {
 		const hashProductsCount = productCount.map(item => `${item};`).join('')  
 		const hashProductsPrices = productPrice.map(item => `${item};`).join('').slice(0, -1)
 
-		const hashString = `${process.env.MERCHANT_ACCOUNT};${process.env.MERCHANT_DOMAIN};${newOrder.id};${orderDate};${sum};UAH;`
+		const hashString = `${process.env.MERCHANT_ACCOUNT};${process.env.MERCHANT_DOMAIN};${newOrder.uuid};${orderDate};${sum};UAH;`
 		const hex = hashString + hashProductsNames + hashProductsCount + hashProductsPrices
 
 		const requestData = {
@@ -139,9 +148,9 @@ export default async function(ctx: Context & RequestBody) {
 			currency: "UAH",
 			amount: sum,
 			language: "UA",
-			returnUrl: `${process.env.MERCHANT_RETURN_URL}/order?id=${newOrder.id}` ,
-			orderReference: String(newOrder.id),
-			orderNo: String(newOrder.id), 
+			returnUrl: `${process.env.MERCHANT_RETURN_URL}/order?id=${newOrder.uuid}` ,
+			orderReference: newOrder.uuid,
+			orderNo: newOrder.uuid, 
 			orderDate: orderDate,
 			productName: productName,
 			productPrice: productPrice,
@@ -152,8 +161,8 @@ export default async function(ctx: Context & RequestBody) {
 			clientLastName: order.surname || ''
 		}        
           
-		const res = await axios.post('https://secure.wayforpay.com/pay?behavior=offline', JSON.stringify(requestData))          
-
+		const res = await axios.post('https://secure.wayforpay.com/pay?behavior=offline', JSON.stringify(requestData))    
+				
 		if (res.data.url) {
 			ctx.send(res.data.url);
 		} else ctx.send('error');

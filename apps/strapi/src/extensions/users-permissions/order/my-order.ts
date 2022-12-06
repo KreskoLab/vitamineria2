@@ -32,7 +32,7 @@ export default async function(ctx: Context) {
 			await new Promise((resolve) => {
 				setTimeout(() => {
 					resolve('ok')
-				}, 2000);
+				}, 3000);
 			})
   
 			const res = await axios.post('https://api.wayforpay.com/api', JSON.stringify(requestData))  

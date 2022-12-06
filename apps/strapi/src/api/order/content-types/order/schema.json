@@ -37,6 +37,9 @@
     "sum": {
       "type": "decimal",
       "default": 0
+    },
+    "uuid": {
+      "type": "uid"
     }
   }
 }

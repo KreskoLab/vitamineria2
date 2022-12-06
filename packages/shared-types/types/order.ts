@@ -14,6 +14,7 @@ export type Order = {
 	paid: boolean
 	date: string
 	sum: number
+	uuid: string;
 	status: STATUS
 	products: OrderProduct[]
 	userinfo: OrderInfo,
