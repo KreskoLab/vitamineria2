@@ -153,7 +153,7 @@ async function validate() {
 			class="border-t-2 border-gray-600"
 		>
 			<div class="flex flex-col space-y-6 px-4 py-6">
-				<button
+				<!-- <button
 					:key="buttonKey" 
 					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-green-200"
 					@click.once="validate()"
@@ -165,6 +165,12 @@ async function validate() {
 					<template v-else>
 						Оформити
 					</template>
+				</button> -->
+				<button
+					:key="buttonKey" 
+					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-red-500"
+				>
+					Тимчасово не приймаємо замовлення :( 
 				</button>
 			</div>
 		</section>
