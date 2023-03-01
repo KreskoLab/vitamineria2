@@ -31,22 +31,30 @@ export default defineNuxtConfig({
 				{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
 			]
 		},
+
+		pageTransition: {
+			name: 'fade',
+			mode: 'out-in' // default
+		},
 	},
 
 	hooks: {
 		async 'nitro:config' (nitroConfig) {
-			if (nitroConfig.dev) { return }
+			if (nitroConfig.dev) {  
+			 return; 
+			}
 			
 			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
 			nitroConfig.prerender.routes.push(...res)
 		}
 	},
 
-	nitro: {
-		prerender: {
-			crawlLinks: false,
-			ignore: ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password']
-		}
+	routeRules: {
+		'/auth/**': {  ssr: true  },
+		'/account/**': { ssr: true },
+		'/order': { ssr: true },
+		'/register': { ssr: true },
+		'/reset-password': { ssr: true }
 	},
 
 	partytown: {

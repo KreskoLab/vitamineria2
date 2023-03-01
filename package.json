@@ -20,10 +20,8 @@
   "devDependencies": {
     "eslint-config-custom": "*",
     "prettier": "latest",
-    "turbo": "latest"
-  },
-  "engines": {
-    "node": ">=16.13.2 <=16.19.0"
+    "turbo": "latest",
+    "dotenv-cli": "latest"
   },
   "dependencies": {}
 }
