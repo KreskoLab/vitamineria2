@@ -30,7 +30,7 @@ await Promise.all([fetchCartProducts(), useFetchUser()])
 
 		<main 
 			class="overflow-x-hidden pt-30 lg:pt-32">
-			<NuxtPage />
+			<NuxtPage :page-key="$route.fullPath" />
 		</main>
 	</div>
 </template>
