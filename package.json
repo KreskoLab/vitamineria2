@@ -14,7 +14,7 @@
     "dev:nuxt": "cd apps/nuxt3 && yarn dev",
     "dev:strapi": "cd apps/strapi && yarn develop",
     "build:types": "cd packages/shared-types && yarn build",
-    "build:nuxt": "cd apps/nuxt3 && yarn build",
+    "build:nuxt": "cd apps/nuxt3 && yarn generate",
     "build:strapi": "cd apps/strapi && yarn build"
   },
   "devDependencies": {

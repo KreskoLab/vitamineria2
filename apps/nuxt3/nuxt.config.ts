@@ -34,7 +34,7 @@ export default defineNuxtConfig({
 
 		pageTransition: {
 			name: 'fade',
-			mode: 'out-in' // default
+			mode: 'out-in',
 		},
 	},
 
@@ -43,11 +43,10 @@ export default defineNuxtConfig({
 			if (nitroConfig.dev) {  
 			 return; 
 			}
-
-			nitroConfig.prerender.crawlLinks = false;
-			nitroConfig.prerender.ignore = ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password'];
 			
 			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
+
+			nitroConfig.prerender.crawlLinks = false;
 			nitroConfig.prerender.routes.push(...res)
 		}
 	},
