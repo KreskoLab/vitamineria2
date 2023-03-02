@@ -16,6 +16,8 @@ export default defineNuxtConfig({
 		}
 	},
 
+	ssr: true,
+
 	app: {
 		head: {
 			titleTemplate: '%s - Вітамінерія',
@@ -43,6 +45,8 @@ export default defineNuxtConfig({
 			if (nitroConfig.dev) {  
 			 return; 
 			}
+
+			nitroConfig.prerender!.crawlLinks = false;
 			
 			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
 			nitroConfig.prerender.routes.push(...res)
@@ -54,7 +58,7 @@ export default defineNuxtConfig({
 		'/account/**': { ssr: true },
 		'/order': { ssr: true },
 		'/register': { ssr: true },
-		'/reset-password': { ssr: true }
+		'/reset-password': { ssr: true },
 	},
 
 	partytown: {
