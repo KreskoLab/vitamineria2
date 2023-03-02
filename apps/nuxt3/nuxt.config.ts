@@ -44,8 +44,8 @@ export default defineNuxtConfig({
 			 return; 
 			}
 
-			nitroConfig.prerender!.crawlLinks = false;
-			nitroConfig.prerender?.ignore = ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password'];
+			nitroConfig.prerender.crawlLinks = false;
+			nitroConfig.prerender.ignore = ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password'];
 			
 			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
 			nitroConfig.prerender.routes.push(...res)
