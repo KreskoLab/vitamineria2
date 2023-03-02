@@ -22,8 +22,5 @@
     "prettier": "latest",
     "turbo": "latest"
   },
-  "engines": {
-    "node": ">=16.13.2 <=16.19.0"
-  },
   "dependencies": {}
 }
