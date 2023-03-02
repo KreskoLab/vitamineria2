@@ -40,26 +40,26 @@ export default defineNuxtConfig({
 		},
 	},
 
-	hooks: {
-		async 'nitro:config' (nitroConfig) {
-			if (nitroConfig.dev) {  
-			 return; 
-			}
+	// hooks: {
+	// 	async 'nitro:config' (nitroConfig) {
+	// 		if (nitroConfig.dev) {  
+	// 		 return; 
+	// 		}
 
-			nitroConfig.prerender!.crawlLinks = false;
+	// 		nitroConfig.prerender!.crawlLinks = false;
 			
-			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
-			nitroConfig.prerender.routes.push(...res)
-		}
-	},
+	// 		const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
+	// 		nitroConfig.prerender.routes.push(...res)
+	// 	}
+	// },
 
-	routeRules: {
-		'/auth/**': {  ssr: true  },
-		'/account/**': { ssr: true },
-		'/order': { ssr: true },
-		'/register': { ssr: true },
-		'/reset-password': { ssr: true },
-	},
+	// routeRules: {
+	// 	'/auth/**': {  ssr: true  },
+	// 	'/account/**': { ssr: true },
+	// 	'/order': { ssr: true },
+	// 	'/register': { ssr: true },
+	// 	'/reset-password': { ssr: true },
+	// },
 
 	partytown: {
 		forward: ['dataLayer.push', 'fbq'],
