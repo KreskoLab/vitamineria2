@@ -18,6 +18,7 @@ const { login } = useStrapiAuth()
 async function auth() {
 	try {
 		await login({ identifier: loginModal.email, password: loginModal.password })
+		modal.value?.toggle();
 	} catch (error) {
 		if (error.error.status === 400) {
 			useNotification('Неправильний email або пароль', 'error')
@@ -31,7 +32,7 @@ async function auth() {
 
 function resetPassword() {
 	loginModal.reset = true
-	modal.value.toggle()
+	modal.value?.toggle()
 	emit('resetPassword')
 }
 </script>
@@ -46,6 +47,7 @@ function resetPassword() {
 					width="248"
 					height="248"
 					src="@/assets/logo.svg"
+					loading="lazy"
 					class="ml-4 lg:ml-16"
 					alt="logo"
 				/>
