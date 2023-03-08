@@ -18,6 +18,8 @@ const { login } = useStrapiAuth()
 async function auth() {
 	try {
 		await login({ identifier: loginModal.email, password: loginModal.password })
+		await useFetchUser();
+
 		modal.value?.toggle();
 	} catch (error) {
 		if (error.error.status === 400) {
@@ -54,7 +56,7 @@ function resetPassword() {
 
 				<button
 					class="flex items-center justify-center outline-transparent ml-auto"
-					@click="modal.toggle()"
+					@click="modal?.toggle()"
 				>
 					<Icon
 						name="tabler:x"
@@ -111,7 +113,7 @@ function resetPassword() {
 				<NuxtLink
 					to="/register"
 					class="hover:bg-green-200 auth-button !w-max lg:!px-4"
-					@click="modal.toggle()"
+					@click="modal?.toggle()"
 				>
 					<span class="text-sm mx-auto">
 						Зареєструватися
