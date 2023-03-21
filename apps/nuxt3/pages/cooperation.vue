@@ -38,14 +38,14 @@ const products: ProductPreview[] = [
 	},
 	{
 		name: 'Гранола "take away" 125г =',
-		price: 36,
-		oldPrice: 45,
+		price: 50,
+		oldPrice: 40,
 		image: 'SMALL_photo1667043252_3_564d287481.jpg',
 	},
 	{
 		name: 'Гранола в асортименті 300г = ',
-		price: 76,
-		oldPrice: 95,
+		price: 100,
+		oldPrice: 80,
 		image: 'SMALL_photo1666713196_100fd04472.jpg',
 	},
 	{
@@ -54,6 +54,14 @@ const products: ProductPreview[] = [
 		oldPrice: 65,
 		image: 'SMALL_photo1668186659_f34552b710.jpg',
 	},
+
+	{
+		name: 'Йогуртова пастила 100г = ',
+		price: 99,
+		oldPrice: 79,
+		image: 'SMALL_photo_5246985340651162256_y_e38be4fe32',
+	},
+
 	{
 		name: 'Фріпси в асортименті',
 		image: 'SMALL_photo1665581014_1_46b04cc937.jpeg',
