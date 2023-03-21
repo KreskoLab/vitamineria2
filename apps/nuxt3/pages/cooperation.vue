@@ -57,6 +57,16 @@ const products: ProductPreview[] = [
 	{
 		name: 'Фріпси в асортименті',
 		image: 'SMALL_photo1665581014_1_46b04cc937.jpeg',
+	},
+
+	{
+		name: 'Оренда полички 400 грн <br /> 36x30x30 ШxВxГ',
+		image: 'SMALL_photo_5246910410651715303_y_6fd5be3411.jpeg',
+	},
+
+	{
+		name: 'Оренда полички 300 грн <br /> 26x19x18 ШxВxГ',
+		image: 'SMALL_photo_5246910410651715304_y_786e45a019.jpeg',
 	}
 ]
 </script>
@@ -90,7 +100,7 @@ const products: ProductPreview[] = [
       
 						<div class="flex flex-col items-center w-full mt-1 lg:mt-2 text-center">
 							<div class="text-sm px-4 lg:px-0 sm:text-base lg:text-xl font-medium text-dark-400 break-words">
-								{{ product.name }}
+								<span v-html="product.name" />
 
 								<div v-if="product.oldPrice" class="inline-block relative">
 									<span class="text-dark-50">
