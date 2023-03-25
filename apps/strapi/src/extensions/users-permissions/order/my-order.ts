@@ -42,7 +42,7 @@ export default async function(ctx: Context) {
 				await sendEmial(customerEmail, `Замовлення ${orderId}`, process.env.EMAIL_TEXT)
 
 				ctx.send(PAYMENT_STATUS.SUCCESS)
-			} else ctx.send(PAYMENT_STATUS.ERROR)
+			} else ctx.send(PAYMENT_STATUS.SUCCESS)
 		}
 	} else ctx.send(PAYMENT_STATUS.ERROR)
 }
