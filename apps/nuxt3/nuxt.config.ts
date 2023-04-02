@@ -36,9 +36,11 @@ export default defineNuxtConfig({
 	hooks: {
 		async 'nitro:config' (nitroConfig) {
 			if (nitroConfig.dev) { return }
-			
-			const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
-			nitroConfig.prerender.routes.push(...res)
+
+			if (process.env.NUXT_PUBLIC_STRAPI) {
+				const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
+				nitroConfig.prerender?.routes?.push(...res)
+			}
 		}
 	},
 
