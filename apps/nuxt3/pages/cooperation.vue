@@ -8,26 +8,26 @@ useHead({
 const products: ProductPreview[] = [
 	{
 		name: 'Пастила в асортименті 100 г =',
-		price: 79,
-		oldPrice: 99,
+		price: 88,
+		oldPrice: 110,
 		image: 'SMALL_photo1666351091_2_a3202d2b0b.jpg',
 	},
 	{
 		name: 'Зефірно-яблучна порційна =',
-		price: 20,
-		oldPrice: 25,
+		price: 28,
+		oldPrice: 35,
 		image: 'SMALL_photo1666351178_5d17377661.jpg',
 	},
 	{
 		name: 'Пастила "take away" =',
-		price: 15,
-		oldPrice: 19,
+		price: 20,
+		oldPrice: 25,
 		image: 'SMALL_photo1666351178_1_fc39dd315b.jpg',
 	},
 	{
 		name: 'Заварна пастила «Бізе» 50г =',
-		price: 44,
-		oldPrice: 55,
+		price: 48,
+		oldPrice: 60,
 		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
 	},
 	{
@@ -57,8 +57,8 @@ const products: ProductPreview[] = [
 
 	{
 		name: 'Йогуртова пастила 100г = ',
-		price: 99,
-		oldPrice: 79,
+		price: 88,
+		oldPrice: 110,
 		image: 'SMALL_photo_5246985340651162256_y_e38be4fe32',
 	},
 
