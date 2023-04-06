@@ -43,16 +43,10 @@ onMounted(async () => {
 
 		<div v-else>
 			<h1 class="text-2xl text-center md:text-3xl font-medium">
-				<template v-if="res === PAYMENT_STATUS.SUCCESS">
-					Дякуємо! Замовлення в обробці
-				</template>
-	
-				<template v-if="res === PAYMENT_STATUS.ERROR">
-					Під час створення замовлення винкила помилка
-				</template>
+				Дякуємо! Замовлення в обробці
 			</h1>
 	
-			<div v-if="res === PAYMENT_STATUS.SUCCESS">
+			<div>
 				<p class="text-2xl text-center md:text-3xl font-medium">
 					На вашу пошту відправлено лист
 				</p>
