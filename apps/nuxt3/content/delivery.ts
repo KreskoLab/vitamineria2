@@ -15,7 +15,7 @@ export const delivery: Delivery[] = [
 		value: POST.UKRPOSHTA
 	},
 	{
-		name: 'Самовивіз',
+		name: 'Самовивіз (Київ, Оболонський район)',
 		value: POST.SAMOVIVIZ
 	},
 	{

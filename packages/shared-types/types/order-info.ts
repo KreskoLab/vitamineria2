@@ -1,7 +1,7 @@
 export enum POST {
 	NOVAPOSHTA = 'Нова пошта',
 	UKRPOSHTA = 'Укрпошта',
-	SAMOVIVIZ = 'Самовивіз',
+	SAMOVIVIZ = 'Самовивіз (Київ, Оболонський район)',
 	DOSTAVKA = 'Доставка'
 }
 
