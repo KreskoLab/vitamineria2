@@ -31,10 +31,10 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
 	},
 	{
-		name: 'Злаково-горіхове печиво 100г =',
-		price: 52,
-		oldPrice: 65,
-		image: 'SMALL_photo1666351091_0e4b3b08fb.jpg',
+		name: 'Горіхово-злаковий батончик 20г =',
+		price: 20,
+		oldPrice: 25,
+		image: 'SMALL_photo_5305555088112208383_y_e0fd1f35ec.jpg',
 	},
 	{
 		name: 'Гранола "take away" 125г =',
