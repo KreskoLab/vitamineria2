@@ -16,7 +16,7 @@ const products: ProductPreview[] = [
 		name: 'Зефірно-яблучна порційна =',
 		price: 28,
 		oldPrice: 35,
-		image: 'SMALL_photo_5305555088112209050_y_4694535391.jpg',
+		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
 	},
 	{
 		name: 'Пастила "take away" =',
