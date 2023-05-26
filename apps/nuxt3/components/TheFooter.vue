@@ -24,6 +24,10 @@
 			<NuxtLink class="font-semibold text-lg sm:text-xl" to="/cooperation">
 				🤝 Співпраця
 			</NuxtLink>
+
+			<NuxtLink class="text-base" to="/about-us">
+				Про нас
+			</NuxtLink>
 		
 			<div class="hidden lg:(flex items-center space-x-2)">
 				<Icon name="tabler-mail" class="w-4 h-4" />
