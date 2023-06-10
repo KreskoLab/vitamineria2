@@ -68,7 +68,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 			>
 				<NuxtLink
 					:to="`/${category.attributes.slug}`"
-					class="hidden lg:(flex items-center text-dark-100 text-lg font-medium h-full)"
+					class="hidden lg:(flex items-center text-dark-100 text-md font-medium h-full)"
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@mouseenter="getSubcategories(category.attributes.subcategories.data, category.attributes.slug)"
 				>
