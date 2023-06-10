@@ -1,6 +1,7 @@
 <script setup lang="ts">
 useHead({
-	title: 'Про нас'
+	title: 'Про нас',
+	meta: [{name: 'robots', content: 'noindex, nofollow'}]
 })
 </script>
 
@@ -8,10 +9,10 @@ useHead({
 	<main class="flex flex-col gap-24 w-full lg:px-96 py-16 h-[calc(100vh-7.5rem)] lg:(h-[calc(100vh-8rem)]) overflow-y-auto bg-[#F7E4DF]">
 		<div class="flex flex-col items-center gap-6 sm:flex-row">
 			<img 
-				class="w-[358px] h-[535px]" 
+				class="w-[558px] h-[535px] object-fill" 
 				width="853" 
 				height="1280" 
-				src="https://res.cloudinary.com/kresko/image/upload/v1684585641/photo_5388921489954295379_y_52f19d4179.jpg" 
+				src="https://res.cloudinary.com/kresko/image/upload/v1684585641/main_fa69b731a2.jpg" 
 				alt="customers"
 			/>
 
@@ -56,7 +57,7 @@ useHead({
 				alt="customers"
 				loading="lazy"
 				decoding="async"
-			/>		
+			/>
 		</div>
 	</main>
 </template>
