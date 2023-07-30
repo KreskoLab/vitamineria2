@@ -38,11 +38,11 @@ useHead({
 	meta: [
 		{
 			name: 'description',
-			content: category.value.seo[0].description
+			content: category.value?.seo[0]?.description
 		},
 		{
 			name: 'keywords',
-			content: category.value.seo[0].keywords
+			content: category.value?.seo[0]?.keywords
 		}
 	]
 })

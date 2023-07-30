@@ -38,14 +38,14 @@ const products: ProductPreview[] = [
 	},
 	{
 		name: 'Гранола "take away" 125г =',
-		price: 50,
-		oldPrice: 40,
+		price: 40,
+		oldPrice: 50,
 		image: 'SMALL_photo1667043252_3_564d287481.jpg',
 	},
 	{
 		name: 'Гранола в асортименті 300г = ',
-		price: 100,
-		oldPrice: 80,
+		price: 80,
+		oldPrice: 100,
 		image: 'SMALL_photo1666713196_100fd04472.jpg',
 	},
 	{
@@ -68,13 +68,18 @@ const products: ProductPreview[] = [
 	},
 
 	{
-		name: 'Оренда полички 400 грн <br /> 36x30x30 ШxВxГ',
+		name: 'Оренда полички 300 грн <br /> 36x30x30 ШxВxГ',
 		image: 'SMALL_photo_5246910410651715303_y_6fd5be3411.jpeg',
 	},
 
 	{
-		name: 'Оренда полички 300 грн <br /> 26x19x18 ШxВxГ',
+		name: 'Оренда полички 200 грн <br /> 26x19x18 ШxВxГ',
 		image: 'SMALL_photo_5246910410651715304_y_786e45a019.jpeg',
+	},
+
+	{
+		name: 'Оренда полички 100 грн <br /> 9x9x9 ШxВxГ',
+		image: 'SMALL_photo_5348362477395628376_y_d7fabba31a.jpeg',
 	}
 ]
 </script>

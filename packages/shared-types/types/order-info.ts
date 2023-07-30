@@ -17,6 +17,7 @@ export type OrderInfo = {
 	phone: string
 	email: string
 	account: boolean
+	info: string
 	post: {
 		name: POST,
 		region?: string

@@ -21,6 +21,7 @@ const order = reactive<OrderInfo>({
 	surname: '',
 	email: '',
 	phone: '',
+	info: '',
 	account: false,
 	payment: PAYMENT.ONLINE,
 	post: {
@@ -145,6 +146,13 @@ async function validate() {
 					class="col-span-full"
 					label="Спосіб оплати"
 					:options="payments"
+				/>
+
+				<AppInput
+					v-model="order.info"
+					class="col-span-full"
+					label="Примітка"
+					:required="false"
 				/>
 			</fieldset>
 		</form>

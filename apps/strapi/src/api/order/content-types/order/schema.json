@@ -40,6 +40,9 @@
     },
     "uuid": {
       "type": "uid"
+    },
+    "info": {
+      "type": "text"
     }
   }
 }
