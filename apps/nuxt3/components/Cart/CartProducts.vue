@@ -87,9 +87,10 @@ function toOrder() {
 
 				<button
 					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-green-200"
+					@click="toOrder"
 					
 				>
-					Замовити
+					Оформити
 				</button>
 			</div>
 		</section>
