@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cuopons",
+  "info": {
+    "singularName": "cuopon",
+    "pluralName": "cuopons",
+    "displayName": "cuopons"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "discount": {
+      "type": "integer"
+    }
+  }
+}
