@@ -10,7 +10,7 @@ export default async function(ctx) {
 	const productsSlugsWithCategory = categories.filter(item => item.subcategories.length === 0).map(item => item.products.map(product => `/${item.slug}/product/${product.slug}`)).flat()
 
 	const productsSlugsWithSubcategory = subcategoriesWithProducts.map(item => {
-		const category = categories.filter(item => item.subcategories.length).map(({ slug, subcategories }) => ({ slug, subcategories })).find(j => j.subcategories.some(k => k.slug === item.slug)).slug
+		const category = categories.filter(item => item.subcategories.length).map(({ slug, subcategories }) => ({ slug, subcategories })).find(j => j.subcategories.some(k => k.slug === item.slug))?.slug
 		return item.products.map(product => `/${category}/${item.slug}/${product.slug}`)
 	}).flat()
 
