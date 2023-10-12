@@ -10,7 +10,7 @@ const products: ProductPreview[] = [
 		name: 'Пастила в асортименті 100 г =',
 		price: 88,
 		oldPrice: 110,
-		image: 'SMALL_photo1666351091_2_a3202d2b0b.jpg',
+		image: 'SMALL_viber_image_2023_10_12_12_45_23_445_4667de302c.jpg',
 	},
 	{
 		name: 'Зефірно-яблучна порційна =',
@@ -19,10 +19,16 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
 	},
 	{
-		name: 'Пастила "take away" =',
+		name: 'Пастила фруктово-ягідна "take away" =',
 		price: 20,
 		oldPrice: 25,
 		image: 'SMALL_photo1666351178_1_fc39dd315b.jpg',
+	},
+	{
+		name: 'Пастила йогуртові цукерки "take away" =',
+		price: 20,
+		oldPrice: 25,
+		image: 'SMALL_photo_5278518449372516310_w_92b75fd189.jpg',
 	},
 	{
 		name: 'Заварна пастила «Бізе» 50г =',
@@ -68,17 +74,17 @@ const products: ProductPreview[] = [
 	},
 
 	{
-		name: 'Оренда полички 300 грн <br /> 36x30x30 ШxВxГ',
+		name: 'Оренда полички в подарунок <br /> 36x30x30 ШxВxГ',
 		image: 'SMALL_photo_5246910410651715303_y_6fd5be3411.jpeg',
 	},
 
 	{
-		name: 'Оренда полички 200 грн <br /> 26x19x18 ШxВxГ',
+		name: 'Оренда полички в подарунок <br /> 26x19x18 ШxВxГ',
 		image: 'SMALL_photo_5246910410651715304_y_786e45a019.jpeg',
 	},
 
 	{
-		name: 'Оренда полички 100 грн <br /> 9x9x9 ШxВxГ',
+		name: 'Оренда полички в подарунок <br /> 9x9x9 ШxВxГ',
 		image: 'SMALL_photo_5348362477395628376_y_d7fabba31a.jpeg',
 	}
 ]
