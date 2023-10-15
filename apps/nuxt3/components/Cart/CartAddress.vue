@@ -183,7 +183,7 @@ async function checkPromocode() {
 						:required="false"
 					/>
 
-					<button
+					<div
 						class=" 
 						appearance-none
 						bg-amber-200 py-2 
@@ -200,7 +200,7 @@ async function checkPromocode() {
 						<span class="text-sm sm:text-base font-medium mx-auto">
 							Примінити
 						</span>
-					</button>
+					</div>
 				</div>
 			</fieldset>
 		</form>
