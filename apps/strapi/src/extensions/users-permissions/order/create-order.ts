@@ -89,7 +89,7 @@ export default async function(ctx: Context & RequestBody) {
 
 	const couponService = strapi.services['api::cuopon.cuopon']
 	const { results: couponsResults } = await couponService.find(order.promocode);
-	const discount = couponsResults.find(item => item.name === order.promocode).discount || 0;
+	const discount = couponsResults.find(item => item.name === order.promocode)?.discount || 0;
 
 	const ordersService = strapi.services['api::order.order']
 	const cartProductsIds = cart.map(item => item.id)
