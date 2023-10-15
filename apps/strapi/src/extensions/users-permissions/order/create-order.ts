@@ -87,6 +87,10 @@ export default async function(ctx: Context & RequestBody) {
 		console.log(error);
 	}
 
+	const couponService = strapi.services['api::cuopon.cuopon']
+	const { results: couponsResults } = await couponService.find(order.promocode);
+	const discount = couponsResults.find(item => item.name === order.promocode).discount || 0;
+
 	const ordersService = strapi.services['api::order.order']
 	const cartProductsIds = cart.map(item => item.id)
 
@@ -114,7 +118,8 @@ export default async function(ctx: Context & RequestBody) {
 		})
 	})
 
-	const sum = productPrice.reduce((acc, cv, i) => acc + cv * productCount[i], 0)
+	const sum = productPrice.reduce((acc, cv, i) => acc + cv * productCount[i], 0);
+	const sumWithPromocode =  sum - (discount * sum) / 100;
 
 	const newOrder = await ordersService.create({ 
 		data: {
@@ -122,14 +127,16 @@ export default async function(ctx: Context & RequestBody) {
 			products: orderProducts, 
 			date: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kiev' }),
 			publishedAt: new Date(),
-			sum: sum,
+			sum: sumWithPromocode,
 			uuid: randomUUID({ disableEntropyCache: true }),
 		}
 	}) as Order   
 
 	const isOrderUnpaid = order.payment === PAYMENT.CASH || order.payment === PAYMENT.CARD
 
-	if (isOrderUnpaid) ctx.send(newOrder.id)
+	if (isOrderUnpaid) {
+		ctx.send(newOrder.id)
+	}
 
 	else {
 		const orderDate = new Date(newOrder.publishedAt).getTime()
@@ -138,7 +145,7 @@ export default async function(ctx: Context & RequestBody) {
 		const hashProductsCount = productCount.map(item => `${item};`).join('')  
 		const hashProductsPrices = productPrice.map(item => `${item};`).join('').slice(0, -1)
 
-		const hashString = `${process.env.MERCHANT_ACCOUNT};${process.env.MERCHANT_DOMAIN};${newOrder.uuid};${orderDate};${sum};UAH;`
+		const hashString = `${process.env.MERCHANT_ACCOUNT};${process.env.MERCHANT_DOMAIN};${newOrder.uuid};${orderDate};${sumWithPromocode};UAH;`
 		const hex = hashString + hashProductsNames + hashProductsCount + hashProductsPrices
 
 		const requestData = {
@@ -146,7 +153,7 @@ export default async function(ctx: Context & RequestBody) {
 			merchantDomainName: process.env.MERCHANT_DOMAIN,
 			merchantSignature: hashMerchantSecret(hex),
 			currency: "UAH",
-			amount: sum,
+			amount: sumWithPromocode,
 			language: "UA",
 			returnUrl: `${process.env.MERCHANT_RETURN_URL}/order?id=${newOrder.uuid}` ,
 			orderReference: newOrder.uuid,

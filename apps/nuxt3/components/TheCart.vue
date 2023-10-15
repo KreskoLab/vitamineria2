@@ -6,6 +6,8 @@ const showCart = useCart()
 const tab = useCartTab()
 
 const sidebar = ref<InstanceType<typeof AppSidebar> | null>(null)
+
+const productsPrice = computed(() => products.value.reduce((acc, cv) => acc + cv.prices[0].variants[0].price * cv.count, 0))
 </script>
 
 <template>
@@ -23,7 +25,8 @@ const sidebar = ref<InstanceType<typeof AppSidebar> | null>(null)
 				/>
 
 				<LazyCartAddress 
-					v-show="tab.value === 'address'" 
+					v-show="tab.value === 'address'"
+					:products-price="productsPrice" 
 				/>
 			</div>
 		</div>

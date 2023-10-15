@@ -3,12 +3,21 @@ import { OrderInfo, PAYMENT, POST } from 'shared-types';
 import { delivery, payments } from '@/content';
 import { FormResponse } from '@/interfaces';
 
+const props = defineProps<{
+	productsPrice: number
+}>()
+
+
 const { find } = useStrapi4()
 const client = useStrapiClient()
 
 const user = useUser()
 
+const discount = ref<number>(0)
 const buttonKey = ref<number>(0)
+
+const priceWithDiscount = computed(() => props.productsPrice - (discount.value * props.productsPrice) / 100)
+
 const form = ref<HTMLFormElement | null>(null)
 
 const [formData, adressData] = await Promise.all([
@@ -22,6 +31,7 @@ const order = reactive<OrderInfo>({
 	email: '',
 	phone: '',
 	info: '',
+	promocode: '',
 	account: false,
 	payment: PAYMENT.ONLINE,
 	post: {
@@ -29,8 +39,8 @@ const order = reactive<OrderInfo>({
 	}
 })
 
-const isPostDelivery = computed<boolean>(() => order.post.name === POST.NOVAPOSHTA || order.post.name === POST.UKRPOSHTA)
-const isOnlinePayment = computed<boolean>(() => order.payment === PAYMENT.ONLINE)
+const isPostDelivery = computed(() => order.post.name === POST.NOVAPOSHTA || order.post.name === POST.UKRPOSHTA)
+const isOnlinePayment = computed(() => order.payment === PAYMENT.ONLINE)
 
 onMounted(() => {
 	if (user.value.email) {
@@ -72,12 +82,23 @@ async function validate() {
 	
 	else pay()
 }
+
+async function checkPromocode() {
+	try {
+		const response = await client<number>('/check-coupon', { method: 'POST', body: { coupon: order.promocode } })
+		discount.value = Number(response)
+	} catch (error) {
+		console.log(error);
+	}
+	
+}
 </script>
 
 <template>
 	<div class="flex flex-col justify-between h-full overflow-y-auto">
 		<form
 			ref="form"
+			@submit.prevent="validate"
 		>
 			<fieldset 
 				class="grid grid-cols-2 gap-y-6 gap-x-8 p-4" 
@@ -154,6 +175,33 @@ async function validate() {
 					label="Примітка"
 					:required="false"
 				/>
+
+				<div class="flex items-end w-full col-span-full">
+					<AppInput
+						v-model="order.promocode"
+						label="Промокод"
+						:required="false"
+					/>
+
+					<button
+						class=" 
+						appearance-none
+						bg-amber-200 py-2 
+						w-full
+						outline-none
+						border-l-0
+						border-2 border-gray-600 
+						py-2 px-3 
+						h-[44px]
+						w-min
+						focus:(ring-0 ring-transparent border-gray-600)"
+						@click="checkPromocode"
+					>
+						<span class="text-sm sm:text-base font-medium mx-auto">
+							Примінити
+						</span>
+					</button>
+				</div>
 			</fieldset>
 		</form>
 
@@ -173,6 +221,22 @@ async function validate() {
 					<template v-else>
 						Оформити
 					</template>
+
+					| 
+
+					<div class="inline-block relative">
+						<span>
+							{{ productsPrice }}
+						</span>
+
+						<Icon v-if="discount" name="tabler:x" class="w-6 h-8 -top-1.5 -right-1 lg:(w-8 h-8 -top-2.5px -right-1.5) absolute text-red-600" />
+					</div>
+
+					<span v-if="discount" class="ml-2">
+						{{ priceWithDiscount }}
+					</span>
+
+					грн
 				</button>
 			</div>
 		</section>

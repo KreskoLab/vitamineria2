@@ -18,6 +18,7 @@ export type OrderInfo = {
 	email: string
 	account: boolean
 	info: string
+	promocode?: string;
 	post: {
 		name: POST,
 		region?: string
