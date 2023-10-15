@@ -185,6 +185,7 @@ async function checkPromocode() {
 
 					<div
 						class=" 
+						cursor-pointer
 						appearance-none
 						bg-amber-200 py-2 
 						w-full
