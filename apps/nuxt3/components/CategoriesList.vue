@@ -91,7 +91,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 		>
 			<ul
 				v-if="subcategoriesMenu.show"
-				class="flex flex-col flex-wrap gap-x-16 content-start absolute top-8.5 w-[calc(100%+32px)] border-x-0 border-b-2 lg:(top-21 w-[calc(100%+160px)] border-2 border-t-0 h-42 pt-7 px-8) h-full bg-white border-gray-600 z-50 transform -translate-x-1/2 left-1/2 pt-4 px-4"
+				class="flex flex-col flex-wrap gap-x-16 content-start absolute top-8.5 w-[calc(100%+32px)] border-x-0 border-b-2 lg:(top-21 w-[calc(100%+160px)] border-2 border-t-0 h-42 pt-7 px-8) bg-white border-gray-600 z-50 transform -translate-x-1/2 left-1/2 pt-4 px-4"
 				@mouseleave="subcategoriesMenu.show = false"
 			>
 				<li 
