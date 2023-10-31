@@ -1,10 +1,10 @@
 <template>
 	<Splide class="block sm:hidden" :options="options">
-		<SplideSlide v-for="image in images" :key="image.attributes.hash">
+		<SplideSlide v-for="(image, i) in images" :key="i">
 			<NuxtImg 
-				:src="image.attributes.formats.medium.hash + image.attributes.formats.medium.ext"
-				:width="image.attributes.formats.medium.width"
-				:height="image.attributes.formats.medium.height"
+				:src="image.attributes.hash + image.attributes.ext"
+				:width="image.attributes.width"
+				:height="image.attributes.height"
 				provider="cloudinary"
 				format="webp"
 				loading="lazy"
@@ -19,7 +19,7 @@ import type { Strapi4ResponseData } from '@nuxtjs/strapi/dist/runtime/types/v4';
 import type { Image } from '@/types';
 import '@splidejs/vue-splide/css';
 
-defineProps<{
+const props = defineProps<{
 	images: Strapi4ResponseData<Image>[]
 }>()
 
@@ -34,6 +34,9 @@ const options: Options = {
 	perPage: 1,
 	speed: 600,
 }
+
+console.log(props.images);
+
 </script>
 
 <style>
