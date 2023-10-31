@@ -56,8 +56,8 @@ const products: ProductPreview[] = [
 	},
 	{
 		name: 'Новорічний набір Ялинка 1шт = ',
-		price: 52,
-		oldPrice: 65,
+		price: 60,
+		oldPrice: 70,
 		image: 'SMALL_photo1668186659_f34552b710.jpg',
 	},
 
