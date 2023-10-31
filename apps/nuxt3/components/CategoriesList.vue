@@ -52,7 +52,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 		@mouseleave="subcategoriesMenu.show = false"
 	>
 		<ul 
-			class="relative flex justify-between lg:(justify-start gap-12 space-x-0) h-full overflow-x-auto overflow-y-hidden whitespace-nowrap space-x-3"
+			class="relative flex justify-between lg:(justify-start gap-6 space-x-0) h-full overflow-x-auto overflow-y-hidden whitespace-nowrap space-x-3"
 		>
 			<li
 				v-for="category in categories.data"
