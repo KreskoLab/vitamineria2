@@ -172,7 +172,7 @@ async function checkPromocode() {
 				<AppInput
 					v-model="order.info"
 					class="col-span-full"
-					label="Примітка"
+					label="Примітки"
 					:required="false"
 				/>
 
@@ -199,7 +199,7 @@ async function checkPromocode() {
 						@click="checkPromocode"
 					>
 						<span class="text-sm sm:text-base font-medium mx-auto">
-							Примінити
+							Застосувати
 						</span>
 					</div>
 				</div>
