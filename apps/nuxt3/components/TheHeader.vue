@@ -1,5 +1,5 @@
 <template>
-	<header class="fixed top-10 left-0 w-full h-20 lg:h-22 min-w-[350px] border-b-2 border-gray-600 bg-light-50 z-99">
+	<header class="fixed top-10 left-0 w-full h-20 lg:h-22 min-w-[350px] border-b-2 border-gray-600 z-99 bg-no-repeat bg-center bg-cover bg-opacity-10">
 		<AppContainer class="flex flex-row flex-wrap px-4 pt-1 lg:(justify-between w-full h-full px-12) items-center">
 			<div class="flex lg:flex-1 justify-start flex-shrink-0">
 				<NuxtLink class="flex items-center lg:space-x-1" to="/">
@@ -32,3 +32,9 @@
 		</AppContainer>
 	</header>
 </template>
+
+<style>
+header {
+	background-image: url('@/assets/header.webp');
+}
+</style>
