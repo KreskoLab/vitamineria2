@@ -8,8 +8,8 @@ useHead({
 const products: ProductPreview[] = [
 	{
 		name: 'Пастила в асортименті 100 г =',
-		price: 88,
-		oldPrice: 110,
+		price: 104,
+		oldPrice: 130,
 		image: 'SMALL_viber_image_2023_10_12_12_45_23_445_4667de302c.jpg',
 	},
 	{
@@ -32,8 +32,8 @@ const products: ProductPreview[] = [
 	},
 	{
 		name: 'Заварна пастила «Бізе» 50г =',
-		price: 48,
-		oldPrice: 60,
+		price: 56,
+		oldPrice: 70,
 		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
 	},
 	{
@@ -56,15 +56,15 @@ const products: ProductPreview[] = [
 	},
 	{
 		name: 'Новорічний набір Ялинка 1шт = ',
-		price: 60,
-		oldPrice: 70,
+		price: 65,
+		oldPrice: 80,
 		image: 'SMALL_photo1668186659_f34552b710.jpg',
 	},
 
 	{
 		name: 'Йогуртова пастила 100г = ',
-		price: 88,
-		oldPrice: 110,
+		price: 104,
+		oldPrice: 130,
 		image: 'SMALL_photo_5246985340651162256_y_e38be4fe32',
 	},
 
