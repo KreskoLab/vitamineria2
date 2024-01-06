@@ -83,7 +83,7 @@ export default async function(ctx) {
 	});
 
 	const res = builder.build([...nabori, ...fripsi, ...tomati, ...tsukati])
-	const date = dayjs().format('YYYY-MM-DD HH:m')
+	const date = dayjs().format('YYYY-MM-DD HH:mm')
 
 	const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
