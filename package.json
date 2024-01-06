@@ -22,5 +22,8 @@
     "prettier": "latest",
     "turbo": "latest"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "sharp": "^0.29.0"
+  }
 }

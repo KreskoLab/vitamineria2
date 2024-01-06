@@ -4,6 +4,7 @@ import createOrder from './order/create-order';
 import updateMe from './user/update-me';
 import sitemapRoutes from './sitemap-routes';
 import checkCoupon from './coupons/check-coupon';
+import pricing from './pricing';
 
 export default (plugin) => {
 	plugin.controllers.user['myOrders'] = myOrders
@@ -12,6 +13,7 @@ export default (plugin) => {
 	plugin.controllers.user['updateMe'] = updateMe
 	plugin.controllers.user['sitemapRoutes'] = sitemapRoutes
 	plugin.controllers.user['checkCoupon'] = checkCoupon
+	plugin.controllers.user['pricing'] = pricing
 
 	plugin.routes['content-api'].routes.push(
 		{
@@ -63,6 +65,15 @@ export default (plugin) => {
 			method: 'GET',
 			path: '/sitemap',
 			handler: 'user.sitemapRoutes',
+			config: {
+				policies: [],
+				prefix: '',
+			}
+		},
+		{
+			method: 'GET',
+			path: '/pricing',
+			handler: 'user.pricing',
 			config: {
 				policies: [],
 				prefix: '',
