@@ -14,6 +14,7 @@ export default (plugin) => {
 	plugin.controllers.user['sitemapRoutes'] = sitemapRoutes
 	plugin.controllers.user['checkCoupon'] = checkCoupon
 	plugin.controllers.user['pricing'] = pricing
+	plugin.controllers.user['pricingWebhook'] = pricing
 
 	plugin.routes['content-api'].routes.push(
 		{
@@ -83,7 +84,7 @@ export default (plugin) => {
 		{
 			method: 'POST',
 			path: '/pricing-webhook',
-			handler: 'user.pricing',
+			handler: 'user.pricingWebhook',
 			config: {
 				policies: [],
 				prefix: '',
