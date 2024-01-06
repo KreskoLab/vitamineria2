@@ -79,6 +79,16 @@ export default (plugin) => {
 				prefix: '',
 			}
 		},
+
+		{
+			method: 'POST',
+			path: '/pricing-webhook',
+			handler: 'user.pricing',
+			config: {
+				policies: [],
+				prefix: '',
+			}
+		},
 	);
 
 	return plugin;
