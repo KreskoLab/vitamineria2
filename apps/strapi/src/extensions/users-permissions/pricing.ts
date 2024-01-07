@@ -16,14 +16,15 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 	itemsWithVariants.forEach(item => {
 		item.prices[0].variants.forEach(variant => {
 			const images = (item as any).images.map(item => item.url)
-      
+			const stock_quantity = typeof (item as any).stock_quantity === 'number' ? (item as any).stock_quantity : 10;
+
 			res.push({
 				'@available': item.in_stock, 
 				'@id': item.id, 
 				categoryId, 
 				currencyId: 'UAH', 
 				vendor: 'Вітамінерія', 
-				stock_quantity: 10, 
+				stock_quantity,
 				price: variant.price, 
 				picture: [(item as any).cover.url, ...images], 
 				name: `${item.name} ${variant.weight}`, 
@@ -35,6 +36,7 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 
 	signleItems.forEach(item => {
 		const images = (item as any).images.map(item => item.url)
+		const stock_quantity = typeof (item as any).stock_quantity === 'number' ? (item as any).stock_quantity : 10;
 
 		res.push({
 			'@id': item.id, 
@@ -44,7 +46,7 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 			categoryId, 
 			picture: [(item as any).cover.url, ... images], 
 			vendor: 'Вітамінерія', 
-			stock_quantity: 10, 
+			stock_quantity, 
 			name: item.name, description: convertor.makeHtml(item.brief).trim(), 
 			param: { '@name': 'Вага', paramName: item.prices[0].variants[0].weight } 
 		})

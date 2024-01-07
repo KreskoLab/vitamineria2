@@ -159,6 +159,15 @@
       },
       "type": "boolean",
       "default": true
+    },
+    "stock_quantity": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer",
+      "default": 10
     }
   }
 }
