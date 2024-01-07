@@ -102,7 +102,7 @@ export default async function(ctx) {
           </currencies>
           <categories>
             <category id="${NABORI_ID}" rz_id="${NABORI_ROZETKA_ID}">Жувальні цукерки</category>
-            <category id="${FRIPSI_ID}" rz_id="${FRIPSI_ROZETKA_ID}">Сухофрукти Без бренда</category>
+            <category id="${FRIPSI_ID}" rz_id="${FRIPSI_ROZETKA_ID}">Сухофрукти</category>
             <category id="${TOMATI_ID}">Овочева консервація</category>
             <category id="${TSUKATI_ID}">Сушені овочі</category>
           </categories>
