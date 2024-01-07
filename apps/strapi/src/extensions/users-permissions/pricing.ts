@@ -9,7 +9,7 @@ const convertor = new Converter();
 function productsMapper(products: Product[], slugs: string[], categoryId: number) {
 	const items =  products.filter(product => slugs.includes(product.slug));
 	const signleItems = items.filter(item => item.prices[0].variants.length === 1);
-	const itemsWithVariants = items.filter(item => item.prices[0].variants.length > 1);
+	const itemsWithVariants = items.filter(item => item.prices[0].variants.filter(variant => variant.weight !== '50 грам')).filter(item => item.prices[0].variants.length > 1);
 
 	const res = [];
 
@@ -56,13 +56,15 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 export default async function(ctx) {
 	const TOMATI_SLUGS = ['vyaleni-tomati'];
 	const TSUKATI_SLUGS = ['cukati-garbuzovi'];
-	const NABORI_SLUGS = ['podarunkovyi-nabir-vyshivanka', 'nabir-pastili-vse-bude-dobre', 'degystatsiinyi-set', 'set-ukrain', 'set-veleten', 'nabir-with-ukraine', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-mapa-ukraini', 'nabir-love', 'nabir-vesna', 'nabir-misk-smakolikiv', 'nabir-hvylya-lita', 'nabir-veleten-vesnyanki', 'syrpriz-box', 'syrpriz-box-patriotichniy', 'nabir-kotiki-monstriki', 'nabir-kotiki-kviti', 'nabir-pastili-serce', 'nabir-pastili-skola', 'nabir-pastili-skola-Halloween', 'zi-smakom-ta-lyboviu', 'smakyite-ykrainske', 'nabir-ukraine-is-my-home']
+	const PASTILA_SLUGS = ['pastila-asorti']
+	const NABORI_SLUGS = ['podarunkovyi-nabir-vyshivanka', 'nabir-fripsiv', 'nabir-pobajaiki', 'nabir-pastili-vse-bude-dobre', 'degystatsiinyi-set', 'set-ukrain', 'set-veleten', 'nabir-with-ukraine', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-mapa-ukraini', 'nabir-love', 'nabir-vesna', 'nabir-misk-smakolikiv', 'nabir-hvylya-lita', 'nabir-veleten-vesnyanki', 'syrpriz-box', 'syrpriz-box-patriotichniy', 'nabir-kotiki-monstriki', 'nabir-kotiki-kviti', 'nabir-pastili-serce', 'zi-smakom-ta-lyboviu', 'smakyite-ykrainske', 'nabir-ukraine-is-my-home']
 	const FRIPSI_SLUGS = ['yabluchni-fripsi', 'grushevi-fripsi', 'bananovi-fripsi', 'slivovi-fripsi', 'yablucnhi-fripsi-gorihi-med', 'fripsi-kivi', 'orange-frips', 'fripsi-limonni', 'fripsi-asorti', 'mandarinovi-fripsi', 'fripsi-hurma', 'fripsi-grapefruit', 'kokosovi-fripsi', 'fripsi-ananas', 'fripsi-mango', 'fripsi-polynitsa', 'fripsi-persik', 'fripsi-dina', 'tomat-fripsi']
   
 	const FRIPSI_ID = 3;
 	const NABORI_ID = 5;
 	const TOMATI_ID = 6;
 	const TSUKATI_ID = 9;
+	const PASTILA_ID = 1;
 
 	const FRIPSI_ROZETKA_ID = 394181805;
 	const NABORI_ROZETKA_ID = 391272087;
@@ -73,6 +75,7 @@ export default async function(ctx) {
 	const fripsi = productsMapper(products, FRIPSI_SLUGS, FRIPSI_ID);
 	const tomati = productsMapper(products, TOMATI_SLUGS, TOMATI_ID);
 	const tsukati = productsMapper(products, TSUKATI_SLUGS, TSUKATI_ID);
+	const pastila = productsMapper(products, PASTILA_SLUGS, NABORI_ID);
 
 	const builder = new XMLBuilder({
 		arrayNodeName: "offer",
@@ -82,7 +85,7 @@ export default async function(ctx) {
 		suppressBooleanAttributes: false,
 	});
 
-	const res = builder.build([...nabori, ...fripsi, ...tomati, ...tsukati])
+	const res = builder.build([...nabori, ...fripsi, ...tomati, ...tsukati, ...pastila])
 	const date = dayjs().format('YYYY-MM-DD HH:mm')
 
 	const xml = `
