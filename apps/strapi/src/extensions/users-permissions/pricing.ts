@@ -20,11 +20,11 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 
 			res.push({
 				'@available': item.in_stock, 
-				'@id': item.id, 
+				'@id': `${categoryId}${item.id}`, 
 				categoryId, 
 				currencyId: 'UAH', 
 				vendor: 'Вітамінерія', 
-				stock_quantity,
+				stock_quantity: item.in_stock ? stock_quantity : 0,
 				price: variant.price, 
 				picture: [(item as any).cover.url, ...images], 
 				name: `${item.name} ${variant.weight}`, 
@@ -39,14 +39,14 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 		const stock_quantity = typeof (item as any).stock_quantity === 'number' ? (item as any).stock_quantity : 10;
 
 		res.push({
-			'@id': item.id, 
 			'@available': item.in_stock, 
+			'@id': `${categoryId}${item.id}`, 
 			price: item.prices[0].variants[0].price, 
 			currencyId: 'UAH', 
 			categoryId, 
 			picture: [(item as any).cover.url, ... images], 
 			vendor: 'Вітамінерія', 
-			stock_quantity, 
+			stock_quantity: item.in_stock ? stock_quantity : 0,
 			name: item.name, description: convertor.makeHtml(item.brief).trim(), 
 			param: { '@name': 'Вага', paramName: item.prices[0].variants[0].weight } 
 		})
