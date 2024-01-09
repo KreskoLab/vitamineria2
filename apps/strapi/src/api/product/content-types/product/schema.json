@@ -224,6 +224,14 @@
         }
       },
       "type": "json"
+    },
+    "rozetka_termin_zberiganya": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
