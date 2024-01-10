@@ -232,6 +232,30 @@
         }
       },
       "type": "string"
+    },
+    "rozetka_filter_vaga": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "rozetka_filter_umovi_zberiganya": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "rozetka_filter_harchova": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
