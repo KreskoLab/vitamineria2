@@ -6,8 +6,6 @@ export default defineNuxtConfig({
 
 	css: ['@/assets/main.css'],
 
-	ssr: true,
-
 	strapi: {
 		url: process.env.NUXT_PUBLIC_STRAPI || 'http://localhost:1337'
 	},
@@ -33,6 +31,24 @@ export default defineNuxtConfig({
 				{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
 			]
 		},
+	},
+
+	hooks: {
+		async 'nitro:config' (nitroConfig) {
+			if (nitroConfig.dev) { return }
+
+			if (process.env.NUXT_PUBLIC_STRAPI) {
+				const res = await $fetch<string[]>(`${process.env.NUXT_PUBLIC_STRAPI}/api/sitemap`)
+				nitroConfig.prerender?.routes?.push(...res)
+			}
+		}
+	},
+
+	nitro: {
+		prerender: {
+			crawlLinks: false,
+			ignore: ['/auth/', '/account/', '/account', '/order', '/register', '/reset-password']
+		}
 	},
 
 	partytown: {
