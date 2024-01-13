@@ -256,6 +256,15 @@
         }
       },
       "type": "string"
+    },
+    "rozetka_available": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "boolean",
+      "default": false
     }
   }
 }
