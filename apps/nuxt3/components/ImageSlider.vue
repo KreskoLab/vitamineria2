@@ -34,9 +34,6 @@ const options: Options = {
 	perPage: 1,
 	speed: 600,
 }
-
-console.log(props.images);
-
 </script>
 
 <style>
