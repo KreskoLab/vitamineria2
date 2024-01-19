@@ -2,7 +2,7 @@ export const productAttirbutes = {
 	description: 'Опис',
 	description2: 'Користь складових пастили',
 	composition: 'Склад',
-	energy: 'Поживна цінність на 100г продуктк',
+	energy: 'Поживна цінність на 100г продукту',
 	storage: 'Умови зберігання',
 	payment: 'Оплата та доставка'
 }
