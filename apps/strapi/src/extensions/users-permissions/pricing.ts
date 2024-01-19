@@ -2,53 +2,76 @@ import type { Product } from 'shared-types';
 import { XMLBuilder, XMLParser } from 'fast-xml-parser';
 import { writeFile } from 'node:fs/promises'
 import { Converter } from 'showdown'
+import { groupBy } from 'lodash'
 import dayjs from 'dayjs';
 
 const convertor = new Converter();
 
-function productsMapper(products: Product[], slugs: string[], categoryId: number) {
-	const items =  products.filter(product => slugs.includes(product.slug));
-	const signleItems = items.filter(item => item.prices[0].variants.length === 1);
-	const itemsWithVariants = items.filter(item => item.prices[0].variants.filter(variant => variant.weight !== '50 грам')).filter(item => item.prices[0].variants.length > 1);
+function productsMapper(products: any[]) {
+	const signleItems = products.filter(item => item.prices[0].variants.length === 1);
+	const itemsWithVariants = products.filter(item => item.prices[0].variants.filter(variant => variant.weight !== '50 грам')).filter(item => item.prices[0].variants.length > 1);
 
 	const res = [];
 
 	itemsWithVariants.forEach(item => {
 		item.prices[0].variants.forEach(variant => {
-			const images = (item as any).images.map(item => item.url)
-			const stock_quantity = typeof (item as any).stock_quantity === 'number' ? (item as any).stock_quantity : 10;
+			const images = (item as any).images.map(item => item?.url);
+			const pictures = [...new Set([item.cover.url, ...images])]
+			const stock_quantity = item.rozetka_available ? (item as any).stock_quantity : 0;
+
+			const params = [
+				{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
+				{ '@name': 'Вид', paramName: item.rozetka_vid },  
+				{ '@name': 'Тип', paramName: item.rozetka_tip },  
+				{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
+				{ '@name': 'Термін зберігання', paramName: item.rozetka_termin_zberiganya },  
+				{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
+				{ '@name': 'Країна-виробник', paramName: item.rozetka_filter_krayina_virobnyk }  
+			].filter(param => param.paramName)
 
 			res.push({
-				'@available': item.in_stock, 
-				'@id': `${categoryId}${item.id}`, 
-				categoryId, 
+				'@available': item.rozetka_available, 
+				'@id': `${item.categoryId}${item.id}`, 
+				categoryId: item.categoryId, 
 				currencyId: 'UAH', 
 				vendor: 'Вітамінерія', 
 				stock_quantity: item.in_stock ? stock_quantity : 0,
 				price: variant.price, 
-				picture: [(item as any).cover.url, ...images], 
-				name: `${item.name} ${variant.weight}`, 
+				picture: pictures, 
+				name: `${item.name} Вітамінерія ${variant.weight}`, 
 				description: convertor.makeHtml(item.brief).trim(), 
-				param: { '@name': 'Вага', paramName: variant.weight } 
+				param: params,
 			})
 		})
 	})
 
 	signleItems.forEach(item => {
-		const images = (item as any).images.map(item => item.url)
-		const stock_quantity = typeof (item as any).stock_quantity === 'number' ? (item as any).stock_quantity : 10;
+		const images = (item as any).images.map(item => item?.url)
+		const pictures = [...new Set([item.cover.url, ...images])]
+		const stock_quantity = item.rozetka_available ? (item as any).stock_quantity : 0;
 
+		const params = [
+			{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
+			{ '@name': 'Вид', paramName: item.rozetka_vid },  
+			{ '@name': 'Тип', paramName: item.rozetka_tip },  
+			{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
+			{ '@name': 'Термін зберігання', paramName: item.rozetka_termin_zberiganya },  
+			{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
+			{ '@name': 'Країна-виробник', paramName: item.rozetka_filter_krayina_virobnyk }  
+		].filter(param => param.paramName)
+		
 		res.push({
-			'@available': item.in_stock, 
-			'@id': `${categoryId}${item.id}`, 
+			'@available': item.rozetka_available, 
+			'@id': `${item.categoryId}${item.id}`, 
+			categoryId: item.categoryId, 
 			price: item.prices[0].variants[0].price, 
 			currencyId: 'UAH', 
-			categoryId, 
-			picture: [(item as any).cover.url, ... images], 
+			picture: pictures, 
 			vendor: 'Вітамінерія', 
 			stock_quantity: item.in_stock ? stock_quantity : 0,
-			name: item.name, description: convertor.makeHtml(item.brief).trim(), 
-			param: { '@name': 'Вага', paramName: item.prices[0].variants[0].weight } 
+			name: `${item.name_rozetka} Вітамінерія`, 
+			description: convertor.makeHtml(item.brief).trim(), 
+			param: params,
 		})
 	})
 
@@ -56,28 +79,27 @@ function productsMapper(products: Product[], slugs: string[], categoryId: number
 }
 
 export default async function(ctx) {
-	const TOMATI_SLUGS = ['vyaleni-tomati'];
-	const TSUKATI_SLUGS = ['cukati-garbuzovi'];
-	const PASTILA_SLUGS = ['pastila-asorti']
-	const NABORI_SLUGS = ['podarunkovyi-nabir-vyshivanka', 'nabir-fripsiv', 'nabir-pobajaiki', 'nabir-pastili-vse-bude-dobre', 'degystatsiinyi-set', 'set-ukrain', 'set-veleten', 'nabir-with-ukraine', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-troyanda', 'set-veleten-patriotic', 'nabir-mapa-ukraini', 'nabir-love', 'nabir-vesna', 'nabir-misk-smakolikiv', 'nabir-hvylya-lita', 'nabir-veleten-vesnyanki', 'syrpriz-box', 'syrpriz-box-patriotichniy', 'nabir-kotiki-monstriki', 'nabir-kotiki-kviti', 'nabir-pastili-serce', 'zi-smakom-ta-lyboviu', 'smakyite-ykrainske', 'nabir-ukraine-is-my-home']
-	const FRIPSI_SLUGS = ['yabluchni-fripsi', 'grushevi-fripsi', 'bananovi-fripsi', 'slivovi-fripsi', 'yablucnhi-fripsi-gorihi-med', 'fripsi-kivi', 'orange-frips', 'fripsi-limonni', 'fripsi-asorti', 'mandarinovi-fripsi', 'fripsi-hurma', 'fripsi-grapefruit', 'kokosovi-fripsi', 'fripsi-ananas', 'fripsi-mango', 'fripsi-polynitsa', 'fripsi-persik', 'fripsi-dina', 'tomat-fripsi']
-  
-	const FRIPSI_ID = 3;
-	const NABORI_ID = 5;
-	const TOMATI_ID = 6;
-	const TSUKATI_ID = 9;
-	const PASTILA_ID = 1;
-
-	const FRIPSI_ROZETKA_ID = 394181805;
-	const NABORI_ROZETKA_ID = 391272087;
-
 	const products = await strapi.entityService.findMany('api::product.product', { populate: '*' }) as Product[];
+	const categories = await strapi.entityService.findMany('api::category.category', { populate: '*' }) as any[]
 
-	const nabori = productsMapper(products, NABORI_SLUGS, NABORI_ID);
-	const fripsi = productsMapper(products, FRIPSI_SLUGS, FRIPSI_ID);
-	const tomati = productsMapper(products, TOMATI_SLUGS, TOMATI_ID);
-	const tsukati = productsMapper(products, TSUKATI_SLUGS, TSUKATI_ID);
-	const pastila = productsMapper(products, PASTILA_SLUGS, NABORI_ID);
+
+	const rozetkaCategories = categories.map(item => ({ id: item.id, rozetka_id: item.rozetka_id, name: item.rozetka_name }))
+
+	const rozetkapProducts = categories.map(category => category.products.map(product => ({ ...product, rozetka_category_name: category.rozetka_name || category.subcategories.find(subcategory => subcategory.rozetka_name), categoryId: category.id }))).flat().filter(product => product.rozetka_available)
+	
+	const rozetkapProductswithPrices = rozetkapProducts.map(item => {
+		const itemWithPrice = products.find(product => product.slug === item.slug);
+
+		return {
+			...item,
+			cover: itemWithPrice.cover,
+			images: itemWithPrice.images,
+			prices: itemWithPrice.prices,
+		}
+	})
+
+	const mappedProducts = productsMapper(rozetkapProductswithPrices);
+	const mappedProductsByCategoryId = Object.keys(groupBy(mappedProducts, 'categoryId'));
 
 	const builder = new XMLBuilder({
 		arrayNodeName: "offer",
@@ -87,8 +109,22 @@ export default async function(ctx) {
 		suppressBooleanAttributes: false,
 	});
 
-	const res = builder.build([...nabori, ...fripsi, ...tomati, ...tsukati, ...pastila])
+	const res = builder.build(mappedProducts)
 	const date = dayjs().format('YYYY-MM-DD HH:mm')
+
+	let xmlCategories = '';
+
+	mappedProductsByCategoryId.forEach(key => {
+		const rozetkaCategory = rozetkaCategories.find(item => item.id == key);
+
+		if (rozetkaCategory) {
+			if (rozetkaCategory?.rozetka_id) {
+				xmlCategories += `<category id="${key}" rz_id="${rozetkaCategory.rozetka_id}">${rozetkaCategory.name}</category>`
+			} else {
+				xmlCategories += `<category id="${key}">${rozetkaCategory.name}</category>`
+			}
+		}
+	})
 
 	const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
@@ -101,10 +137,7 @@ export default async function(ctx) {
             <currency id="UAH" rate="1"/>
           </currencies>
           <categories>
-            <category id="${NABORI_ID}" rz_id="${NABORI_ROZETKA_ID}">Жувальні цукерки</category>
-            <category id="${FRIPSI_ID}" rz_id="${FRIPSI_ROZETKA_ID}">Сухофрукти</category>
-            <category id="${TOMATI_ID}">Овочева консервація</category>
-            <category id="${TSUKATI_ID}">Сушені овочі</category>
+            ${xmlCategories}
           </categories>
           <offers>
             ${res}

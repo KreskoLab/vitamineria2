@@ -85,6 +85,22 @@
       },
       "type": "integer",
       "default": 0
+    },
+    "rozetka_name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "rozetka_id": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

@@ -38,6 +38,9 @@
         "low",
         "high"
       ]
+    },
+    "rozetka_name": {
+      "type": "string"
     }
   }
 }
