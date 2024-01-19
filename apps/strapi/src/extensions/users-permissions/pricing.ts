@@ -69,7 +69,7 @@ function productsMapper(products: any[]) {
 			picture: pictures, 
 			vendor: 'Вітамінерія', 
 			stock_quantity: item.in_stock ? stock_quantity : 0,
-			name: `${item.name_rozetka} Вітамінерія`, 
+			name: `${item.name_rozetka}`, 
 			description: convertor.makeHtml(item.brief).trim(), 
 			param: params,
 		})
