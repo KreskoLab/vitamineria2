@@ -14,10 +14,10 @@ function productsMapper(products: any[]) {
 	const res = [];
 
 	itemsWithVariants.forEach(item => {
-		item.prices[0].variants.forEach(variant => {
+		item.prices[0].variants.forEach((variant, index) => {
 			const images = (item as any).images.map(item => item?.url);
 			const pictures = [...new Set([item.cover.url, ...images])]
-			const stock_quantity = item.rozetka_available ? (item as any).stock_quantity : 0;
+			const stock_quantity = item.rozetka_available ? item.stock_quantity : 0;
 
 			const params = [
 				{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
@@ -31,7 +31,7 @@ function productsMapper(products: any[]) {
 
 			res.push({
 				'@available': item.rozetka_available, 
-				'@id': `${item.categoryId}${item.id}`, 
+				'@id': `${item.categoryId}${item.id}${index}`, 
 				categoryId: item.categoryId, 
 				currencyId: 'UAH', 
 				vendor: 'Вітамінерія', 
@@ -48,7 +48,7 @@ function productsMapper(products: any[]) {
 	signleItems.forEach(item => {
 		const images = (item as any).images.map(item => item?.url)
 		const pictures = [...new Set([item.cover.url, ...images])]
-		const stock_quantity = item.rozetka_available ? (item as any).stock_quantity : 0;
+		const stock_quantity = item.rozetka_available ? item.stock_quantity : 0;
 
 		const params = [
 			{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
@@ -83,9 +83,9 @@ export default async function(ctx) {
 	const categories = await strapi.entityService.findMany('api::category.category', { populate: '*' }) as any[]
 
 
-	const rozetkaCategories = categories.map(item => ({ id: item.id, rozetka_id: item.rozetka_id, name: item.rozetka_name }))
+	const rozetkaCategories = categories.map(item => ({ id: item.categoryId, rozetka_id: item.rozetka_id, name: item.rozetka_name }))
 
-	const rozetkapProducts = categories.map(category => category.products.map(product => ({ ...product, rozetka_category_name: category.rozetka_name || category.subcategories.find(subcategory => subcategory.rozetka_name), categoryId: category.id }))).flat().filter(product => product.rozetka_available)
+	const rozetkapProducts = categories.map(category => category.products.map(product => ({ ...product, rozetka_category_name: category.rozetka_name || category.subcategories.find(subcategory => subcategory.rozetka_name), categoryId: category.categoryId }))).flat().filter(product => product.rozetka_available)
 	
 	const rozetkapProductswithPrices = rozetkapProducts.map(item => {
 		const itemWithPrice = products.find(product => product.slug === item.slug);
