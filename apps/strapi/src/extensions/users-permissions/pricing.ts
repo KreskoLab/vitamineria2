@@ -20,7 +20,7 @@ function productsMapper(products: any[]) {
 			const stock_quantity = item.rozetka_available ? item.stock_quantity : 0;
 
 			const params = [
-				{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
+				{ '@name': 'Вага', paramName: variant.weight },
 				{ '@name': 'Вид', paramName: item.rozetka_vid },  
 				{ '@name': 'Тип', paramName: item.rozetka_tip },  
 				{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
