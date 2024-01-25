@@ -69,8 +69,15 @@ const products: ProductPreview[] = [
 	},
 
 	{
+		name: 'Батончики на основі керобу в асортименті <br />',
+		price: 28,
+		oldPrice: 35,
+		image: 'SMALL_viber_image_2024_01_25_13_18_09_164_147ee364f0.jpg',
+	},
+
+	{
 		name: 'Фріпси в асортименті',
-		image: 'SMALL_photo1665581014_1_46b04cc937.jpeg',
+		image: 'SMALL_viber_image_2024_01_25_13_19_02_990_fde8d6b686.jpg',
 	},
 
 	{
