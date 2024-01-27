@@ -13,12 +13,6 @@ const products: ProductPreview[] = [
 		image: 'SMALL_viber_image_2023_10_12_12_45_23_445_4667de302c.jpg',
 	},
 	{
-		name: 'Зефірно-яблучна порційна =',
-		price: 28,
-		oldPrice: 35,
-		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
-	},
-	{
 		name: 'Пастила фруктово-ягідна "take away" =',
 		price: 20,
 		oldPrice: 25,
@@ -31,16 +25,32 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo_5278518449372516310_w_92b75fd189.jpg',
 	},
 	{
-		name: 'Заварна пастила «Бізе» 50г =',
-		price: 56,
-		oldPrice: 70,
-		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
+		name: 'Батончики на основі керобу в асортименті <br />',
+		price: 28,
+		oldPrice: 35,
+		image: 'SMALL_viber_image_2024_01_25_13_18_09_164_147ee364f0.jpg',
 	},
 	{
 		name: 'Горіхово-злаковий батончик 20г =',
 		price: 20,
 		oldPrice: 25,
 		image: 'SMALL_photo_5305555088112208383_y_e0fd1f35ec.jpg',
+	},
+	{
+		name: 'Йогуртова пастила 100г = ',
+		price: 104,
+		oldPrice: 130,
+		image: 'SMALL_photo_5246985340651162256_y_e38be4fe32',
+	},
+	{
+		name: 'Заварна пастила «Бізе» 50г =',
+		price: 56,
+		oldPrice: 70,
+		image: 'SMALL_photo1666351091_1_76eda05fa6.jpg',
+	},
+	{
+		name: 'Фріпси в асортименті',
+		image: 'SMALL_viber_image_2024_01_25_13_19_02_990_fde8d6b686.jpg',
 	},
 	{
 		name: 'Гранола "take away" 125г =',
@@ -59,25 +69,13 @@ const products: ProductPreview[] = [
 		price: 65,
 		oldPrice: 80,
 		image: 'SMALL_photo1668186659_f34552b710.jpg',
-	},
+	},	
 
 	{
-		name: 'Йогуртова пастила 100г = ',
-		price: 104,
-		oldPrice: 130,
-		image: 'SMALL_photo_5246985340651162256_y_e38be4fe32',
-	},
-
-	{
-		name: 'Батончики на основі керобу в асортименті <br />',
+		name: 'Зефірно-яблучна порційна =',
 		price: 28,
 		oldPrice: 35,
-		image: 'SMALL_viber_image_2024_01_25_13_18_09_164_147ee364f0.jpg',
-	},
-
-	{
-		name: 'Фріпси в асортименті',
-		image: 'SMALL_viber_image_2024_01_25_13_19_02_990_fde8d6b686.jpg',
+		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
 	},
 
 	{

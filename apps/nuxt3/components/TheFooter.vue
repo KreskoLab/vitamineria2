@@ -5,7 +5,7 @@
 				<div class="flex items-center space-x-1 lg:space-x-2">
 					<Icon name="tabler-phone" class="w-4 h-4" />
 					<span>
-						+380 63 24 53 347
+						+380 63 245 33 47
 					</span>
 				</div>
 	
