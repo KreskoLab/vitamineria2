@@ -82,13 +82,11 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 	s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
 						</svg>
 					</div>
-
-					
 				</NuxtLink>
 
 				<span
-					class="flex items-center text-sm text-dark-100 font-medium cursor-pointer h-full lg:hidden"
-					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
+					class="flex items-center text-sm text-dark-100 font-medium cursor-pointer h-full bg-light-400 rounded-md px-1 lg:hidden"
+					:class="{ '!text-dark-900 !bg-orange-300': isActive(category.attributes.slug) }"
 					@click="showMenuOnMobile(category.attributes.slug, category.attributes.subcategories.data)"
 				>
 					{{ category.attributes.name }}

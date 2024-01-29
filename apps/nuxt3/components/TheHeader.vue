@@ -14,7 +14,7 @@
 					<img
 						width="152"
 						height="152"
-						class="w-42 lg:w-64"
+						class="w-42 lg:w-44"
 						src="@/assets/logo.svg"
 						alt="logo"
 					/>
