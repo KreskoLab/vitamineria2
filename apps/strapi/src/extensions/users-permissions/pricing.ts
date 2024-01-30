@@ -26,8 +26,18 @@ function productsMapper(products: any[]) {
 				{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
 				{ '@name': 'Термін зберігання', paramName: item.rozetka_termin_zberiganya },  
 				{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
-				{ '@name': 'Країна-виробник', paramName: item.rozetka_filter_krayina_virobnyk }  
+				{ '@name': 'Країна-виробник', paramName: item.rozetka_filter_krayina_virobnyk },
 			].filter(param => param.paramName)
+
+			if (item.rozetka_filter_obosblivosti) {
+				const osoblivosti = item.rozetka_filter_obosblivosti.map(item => item.name).join(' <br /> ');
+				params.push({ '@name': 'Особлиовості', paramName: `<![CDATA[${osoblivosti}]]` })
+			}
+
+			if (item.energy) {
+				const energy = item.energy.map(item => `${item.title} ${item.value}`).join(' - ');
+				params.push({ '@name': 'Харчова та енергетична цінність', paramName: energy })
+			}
 
 			res.push({
 				'@available': item.rozetka_available, 
@@ -59,6 +69,16 @@ function productsMapper(products: any[]) {
 			{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
 			{ '@name': 'Країна-виробник', paramName: item.rozetka_filter_krayina_virobnyk }  
 		].filter(param => param.paramName)
+
+		if (item.rozetka_filter_obosblivosti) {
+			const osoblivosti = item.rozetka_filter_obosblivosti.map(item => item.name).join(' <br /> ');
+			params.push({ '@name': 'Особлиовості', paramName: `<![CDATA[${osoblivosti}]]` })
+		}
+
+		if (item.energy) {
+			const energy = item.energy.map(item => `${item.title} ${item.value}`).join(' - ');
+			params.push({ '@name': 'Харчова та енергетична цінність', paramName: energy })
+		}
 		
 		res.push({
 			'@available': item.rozetka_available, 
