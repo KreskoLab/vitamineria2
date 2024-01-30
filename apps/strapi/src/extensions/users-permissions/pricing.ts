@@ -39,7 +39,7 @@ function productsMapper(products: any[]) {
 				price: variant.price, 
 				picture: pictures, 
 				name: `${item.name} Вітамінерія ${variant.weight}`, 
-				description: convertor.makeHtml(item.brief).trim(), 
+				description: convertor.makeHtml(item.description_rozetka).trim(), 
 				param: params,
 			})
 		})
@@ -70,7 +70,7 @@ function productsMapper(products: any[]) {
 			vendor: 'Вітамінерія', 
 			stock_quantity: item.in_stock ? stock_quantity : 0,
 			name: `${item.name_rozetka}`, 
-			description: convertor.makeHtml(item.brief).trim(), 
+			description: convertor.makeHtml(item.description_rozetka).trim(), 
 			param: params,
 		})
 	})
