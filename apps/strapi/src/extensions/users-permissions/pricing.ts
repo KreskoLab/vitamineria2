@@ -21,8 +21,8 @@ function productsMapper(products: any[]) {
 
 			const params = [
 				{ '@name': 'Вага', paramName: variant.weight },
-				{ '@name': 'Вид', paramName: item.rozetka_vid },  
-				{ '@name': 'Тип', paramName: item.rozetka_tip },  
+				{ '@name': 'Вид', paramName: item.rozetka_filter_vid },  
+				{ '@name': 'Тип', paramName: item.rozetka_filter_tip },  
 				{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
 				{ '@name': 'Термін зберігання', paramName: item.rozetka_termin_zberiganya },  
 				{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
@@ -62,8 +62,8 @@ function productsMapper(products: any[]) {
 
 		const params = [
 			{ '@name': 'Вага', paramName: item.prices[0].variants[0].weight },
-			{ '@name': 'Вид', paramName: item.rozetka_vid },  
-			{ '@name': 'Тип', paramName: item.rozetka_tip },  
+			{ '@name': 'Вид', paramName: item.rozetka_filter_vid },  
+			{ '@name': 'Тип', paramName: item.rozetka_filter_tip },  
 			{ '@name': 'Упаковка', paramName: item.rozetka_filter_upakovka },  
 			{ '@name': 'Термін зберігання', paramName: item.rozetka_termin_zberiganya },  
 			{ '@name': 'Умови зберігання', paramName: item.rozetka_filter_umovi_zberiganya },  
