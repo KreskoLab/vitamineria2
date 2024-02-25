@@ -4,15 +4,25 @@ type Option = {
 	value: string
 }
 
-defineProps<{
+const selected = ref<string>('');
+
+const props = defineProps<{
 	label?: string,
 	modelValue?: string,
 	options: Option[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
 	(event: 'update:modelValue', val: string): void
 }>()
+
+watch(() => props.options, () => {
+	selected.value = ''
+})
+
+watch(selected, (val) => {
+	emit('update:modelValue', val)
+})
 </script>
 
 <template>
@@ -25,14 +35,18 @@ defineEmits<{
 		</label>
 
 		<select 
-			class="appearance-none w-full col-span-full rounded-none border-2 border-gray-600 h-12 px-3" 
-			@change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
+			v-model="selected" 
+			class="appearance-none w-full col-span-full rounded-none border-2 border-gray-600 h-12 px-3"
 		>
+			<option value="" disabled selected>
+				Обрати
+			</option>
+		
 			<option 
-				v-for="option in options" 
-				:key="option.value" 
+				v-for="(option, i) in options" 
+				:key="i" 
 				:value="option.value"
-				:selected="option.value === modelValue"
+				:selected="option.value === selected"
 			>
 				{{ option.name }}
 			</option>

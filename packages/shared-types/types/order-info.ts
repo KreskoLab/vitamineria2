@@ -2,7 +2,7 @@ export enum POST {
 	NOVAPOSHTA = 'Нова пошта',
 	UKRPOSHTA = 'Укрпошта',
 	SAMOVIVIZ = 'Самовивіз (Київ, Оболонський район)',
-	DOSTAVKA = 'Доставка'
+	ROZETKA = 'Rozetka пункт видачі'
 }
 
 export enum PAYMENT {

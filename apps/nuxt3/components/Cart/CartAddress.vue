@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { OrderInfo, PAYMENT, POST } from 'shared-types';
-import { delivery, payments } from '@/content';
+import { delivery, payments, REGIONS } from '@/content';
 import { FormResponse } from '@/interfaces';
+import { Rozetka } from '@/utils/rozetka'
 
 const props = defineProps<{
 	productsPrice: number
 }>()
-
 
 const { find } = useStrapi4()
 const client = useStrapiClient()
@@ -25,6 +25,11 @@ const [formData, adressData] = await Promise.all([
 	find<FormResponse>('user-adress-form')
 ])
 
+const rozetka = reactive({
+	cities: [] as Rozetka.City[],
+	departments: [] as Rozetka.Department[],
+})
+
 const order = reactive<OrderInfo>({
 	name: '',
 	surname: '',
@@ -36,11 +41,29 @@ const order = reactive<OrderInfo>({
 	payment: PAYMENT.ONLINE,
 	post: {
 		name: POST.NOVAPOSHTA
+	},
+	rozetka: {
+		city: '',
+		region: 'Київська',
+		department: '',
 	}
 })
 
 const isPostDelivery = computed(() => order.post.name === POST.NOVAPOSHTA || order.post.name === POST.UKRPOSHTA)
 const isOnlinePayment = computed(() => order.payment === PAYMENT.ONLINE)
+const isRozetkaDelivery = computed(() => order.post.name === POST.ROZETKA)
+
+
+const rozetkaKyiv: Rozetka.City = { 
+	id: 'b205dde2-2e2e-4eb9-aef2-a67c82bbdf27', 
+	name: 'м. Київ', 
+	region_id: '29a00955-5b9d-4d4d-adb3-ff55eb8f4788', 
+	region_name: 'Київ', 
+}
+
+const rozetkaRegions = REGIONS.map(item => ({ name: item, value: item }))
+const rozetkaCities = computed(() => rozetka.cities.map(item => ({ name: item.name, value: item.id })))
+const rozetkaDepartments = computed(() => rozetka.departments.map(item => ({ name: item.name, value: item.name })))
 
 onMounted(() => {
 	if (user.value.email) {
@@ -90,8 +113,34 @@ async function checkPromocode() {
 	} catch (error) {
 		console.log(error);
 	}
-	
 }
+
+watch(() => order.rozetka.region, async (val) => {
+	order.rozetka.city = ''
+	order.rozetka.department = ''
+	
+	if (val) {
+		const res = await getCities(val)
+
+		if (res) {
+			rozetka.cities = res.map(item => ({ id: item.id, name: item.name, region_id: item.region_id, region_name: item.region_name }))
+
+			if (val === 'Київська') {
+				rozetka.cities.unshift(rozetkaKyiv)
+			}
+		}
+	}
+}, { immediate: true })
+
+watch(() => order.rozetka.city, async (val) => {
+	if (val) {
+		const res = await getDepartments(val)
+
+		if (res) {
+			rozetka.departments = res.map(item => ({ id: item.id, name: item.name, location: item.location }))
+		}
+	}
+})
 </script>
 
 <template>
@@ -138,6 +187,29 @@ async function checkPromocode() {
 					label="Доставка"
 					:options="delivery"
 				/>
+
+				<div v-if="isRozetkaDelivery" class="mt-6 grid gap-y-12 gap-x-8 w-full col-span-full">
+					<AppSelect 
+						v-model="order.rozetka.region"
+						class="col-span-full"
+						label="Область"
+						:options="rozetkaRegions"
+					/>
+
+					<AppSelect 
+						v-model="order.rozetka.city"
+						class="col-span-full"
+						label="Місто"
+						:options="rozetkaCities"
+					/>
+
+					<AppSelect 
+						v-model="order.rozetka.department"
+						class="col-span-full"
+						label="Відділення"
+						:options="rozetkaDepartments"
+					/>
+				</div>
 
 				<div 
 					v-if="isPostDelivery"
