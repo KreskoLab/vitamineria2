@@ -19,7 +19,7 @@ export const delivery: Delivery[] = [
 		value: POST.SAMOVIVIZ
 	},
 	{
-		name: 'Rozetka пункт видачі',
+		name: 'Rozetka пункт видачі (39 грн)',
 		value: POST.ROZETKA
 	}
 ]
