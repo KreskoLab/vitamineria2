@@ -285,15 +285,16 @@ watch(() => order.rozetka.city, async (val) => {
 				<button
 					:key="buttonKey" 
 					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-green-200"
-					@click.once="validate()"
 				>
-					<template v-if="isOnlinePayment">
+					У відпустці
+					
+					<!-- <template v-if="isOnlinePayment">
 						Оплатити
 					</template>
 
 					<template v-else>
 						Оформити
-					</template>
+					</template> -->
 
 					| 
 
