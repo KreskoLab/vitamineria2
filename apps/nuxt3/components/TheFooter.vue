@@ -8,8 +8,6 @@
 						+380 63 245 33 47
 					</span>
 				</div>
-
-				<span>У ВІДПУСТЦІ</span>
 	
 				<a
 					href="https://instagram.com/vitamineria.ua"
