@@ -86,6 +86,13 @@ const products: ProductPreview[] = [
 	},
 
 	{
+		name: 'Яблучні фріпси з фундуком та медом =',
+		price: 116,
+		oldPrice: 145,
+		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
+	},
+
+	{
 		name: 'Оренда полички в подарунок <br /> 36x30x30 см ШxВxГ',
 		image: 'SMALL_photo_5246910410651715303_y_6fd5be3411.jpeg',
 	},
