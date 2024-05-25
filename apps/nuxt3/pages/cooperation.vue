@@ -69,13 +69,20 @@ const products: ProductPreview[] = [
 		price: 65,
 		oldPrice: 80,
 		image: 'SMALL_photo1668186659_f34552b710.jpg',
-	},	
+	},
 
 	{
 		name: 'Зефірно-яблучна порційна =',
 		price: 28,
 		oldPrice: 35,
 		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
+	},
+
+	{
+		name: 'Яблучні фріпси з волоським горіхом та медом =',
+		price: 100,
+		oldPrice: 125,
+		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
 	},
 
 	{
@@ -91,7 +98,7 @@ const products: ProductPreview[] = [
 	{
 		name: 'Оренда полички в подарунок <br /> 9x9x9 см ШxВxГ',
 		image: 'SMALL_photo_5348362477395628376_y_d7fabba31a.jpeg',
-	}
+	},
 ]
 </script>
 
