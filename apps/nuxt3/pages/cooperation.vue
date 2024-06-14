@@ -25,6 +25,19 @@ const products: ProductPreview[] = [
 		image: 'SMALL_photo_5278518449372516310_w_92b75fd189.jpg',
 	},
 	{
+		name: 'Яблучні фріпси з волоським горіхом та медом =',
+		price: 100,
+		oldPrice: 125,
+		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
+	},
+
+	{
+		name: 'Яблучні фріпси з фундуком та медом =',
+		price: 116,
+		oldPrice: 145,
+		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
+	},
+	{
 		name: 'Батончики на основі керобу в асортименті <br />',
 		price: 36,
 		oldPrice: 45,
@@ -76,20 +89,6 @@ const products: ProductPreview[] = [
 		price: 28,
 		oldPrice: 35,
 		image: 'SMALL_photo_5348495655741540195_y_38cffdc5c5.jpg',
-	},
-
-	{
-		name: 'Яблучні фріпси з волоським горіхом та медом =',
-		price: 100,
-		oldPrice: 125,
-		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
-	},
-
-	{
-		name: 'Яблучні фріпси з фундуком та медом =',
-		price: 116,
-		oldPrice: 145,
-		image: 'SMALL_viber_image_2024_05_25_14_32_06_560_1db4356486.jpg',
 	},
 
 	{
