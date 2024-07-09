@@ -6,10 +6,10 @@ type Payment = {
 }
 
 export const payments: Payment[] = [
-	// {
-	// 	name: 'Онлайн',
-	// 	value: PAYMENT.ONLINE
-	// },
+	{
+		name: 'Онлайн',
+		value: PAYMENT.ONLINE
+	},
 	{
 		name: "Готівка",
 		value: PAYMENT.CASH
