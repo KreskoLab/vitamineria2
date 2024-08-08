@@ -13,12 +13,14 @@ export default ({ env }) => ({
 			},
 		},
 	},
+	
 	'import-export-entries': {
 		enabled: true,
 		config: {
 			serverPublicHostname: env('ADMIN_URL'),
 		},
 	},
+
 	email: {
 		config: {
 			provider: 'sendgrid',
@@ -28,6 +30,19 @@ export default ({ env }) => ({
 			settings: {
 				defaultFrom: env('EMAIL_FROM'),
 				defaultReplyTo: env('EMAIL_FROM'),
+			},
+		},
+	},
+
+	graphql: {
+		config: {
+			endpoint: '/graphql',
+			shadowCRUD: true,
+			playgroundAlways: false,
+			depthLimit: 7,
+			amountLimit: 200,
+			apolloServer: {
+				tracing: false,
 			},
 		},
 	},
