@@ -25,5 +25,6 @@
   "dependencies": {},
   "resolutions": {
     "sharp": "^0.29.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
