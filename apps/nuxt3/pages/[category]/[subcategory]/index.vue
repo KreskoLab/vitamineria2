@@ -20,7 +20,7 @@ const { data: category } = await useAsyncData(
 )
 
 const sortedProducts = computed(() => {
-	if (category.value.sort) {
+	if (category?.value?.sort) {
 		switch (category.value.sort) {
 			case SORT.LOW:
 				return category.value.products.data.sort((a, b) => a.attributes.prices[0].variants[0].price - b.attributes.prices[0].variants[0].price)
@@ -28,13 +28,13 @@ const sortedProducts = computed(() => {
 			case SORT.HIGHT:
 				return category.value.products.data.sort((a, b) => b.attributes.prices[0].variants[0].price - a.attributes.prices[0].variants[0].price)
 		}
-	} else return category.value.products.data
+	} else return category?.value.products.data
 })
 
 const fullRoute = `${route.params.category}/${param}`
 	
 useHead({
-	title: category.value.name,
+	title: category?.value?.name,
 	meta: [
 		{
 			name: 'description',
@@ -55,7 +55,7 @@ useHead({
 		<AppContainer class="flex flex-col">
 			<div class="flex flex-col space-y-1 pt-5 lg:(space-y-3 px-12 pt-6)">
 				<h1 class="text-center text-4xl lg:(text-6xl font-normal) font-medium text-dark-200 uppercase tracking-widest">
-					{{ category.name }}
+					{{ category?.name }}
 				</h1>
 			</div>
 		

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CategoriesResponse } from '@/interfaces';
+import type { CategoriesResponse } from '@/interfaces';
 import { categoriesQuery } from '@/queries';
 
 const route = useRoute()

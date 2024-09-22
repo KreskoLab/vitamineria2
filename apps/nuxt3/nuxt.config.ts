@@ -78,6 +78,4 @@ export default defineNuxtConfig({
 																	return url;
 									},`
 	},
-
-  compatibilityDate: '2024-09-22',
 })
