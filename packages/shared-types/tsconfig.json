@@ -3,7 +3,6 @@
     "declaration": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
     "importHelpers": true,
     "removeComments": false,
@@ -16,7 +15,7 @@
     "allowJs": false,
     "strict": true,
     "strictNullChecks": false,
-    "types": ["node"],
+    "types": ["@types/node"],
     "moduleResolution": "Node",
     "paths": {
       "tslib": ["../../node_modules/tslib/tslib.d.ts"]
