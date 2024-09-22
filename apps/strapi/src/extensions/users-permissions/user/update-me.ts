@@ -25,7 +25,7 @@ const sanitizeOutput = (user: User, ctx: Context) => {
 export default async function(ctx: Context & RequestBody) {
 	const advancedConfigs = await strapi
 		.store({ type: 'plugin', name: 'users-permissions', key: 'advanced' })
-		.get({});
+		.get();
 
 	const { id } = ctx.state.user;
 	const { email } = ctx.request.body;
@@ -38,7 +38,7 @@ export default async function(ctx: Context & RequestBody) {
 
 	await validateUpdateUserBody(ctx.request.body);
 
-	if (_.has(ctx.request.body, 'email') && (advancedConfigs as any).unique_email) {
+	if (_.has(ctx.request.body, 'email') && advancedConfigs.unique_email) {
 		const userWithSameEmail = await strapi
 			.query('plugin::users-permissions.user')
 			.findOne({ where: { email: email.toLowerCase() } });

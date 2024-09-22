@@ -22,8 +22,8 @@
     "prettier": "latest",
     "turbo": "latest"
   },
+  "dependencies": {},
   "resolutions": {
     "sharp": "^0.29.0"
-  },
-  "packageManager": "pnpm@9.0.0"
+  }
 }
