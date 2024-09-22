@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { marked } from 'marked';
 import { productAttirbutes } from '@/content';
-import { ProductResponse } from '@/interfaces';
+import type { ProductResponse } from '@/interfaces';
 import type { Variant } from '@/types';
 
 const client = useStrapiClient()

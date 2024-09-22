@@ -1,5 +1,3 @@
-import type { Strapi4ResponseData } from '@nuxtjs/strapi/dist/runtime/types/v4'
-
 export type Image = {
 	size: number
 	updatedAt: string
@@ -43,6 +41,6 @@ export type Product = {
 	prices: {
 		variants: Variant[]
 	}[]
-	cover: { data: Strapi4ResponseData<Image> }
-	images: { data: Strapi4ResponseData<Image>[] }
+	cover: { data: any }
+	images: { data: any[] }
 }
