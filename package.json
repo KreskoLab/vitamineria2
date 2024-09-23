@@ -24,7 +24,8 @@
   },
   "dependencies": {},
   "resolutions": {
-    "sharp": "^0.29.0"
+    "sharp": "^0.29.0",
+    "codemirror": "5.65.12"
   },
   "packageManager": "yarn@1.22.22",
   "engines": {

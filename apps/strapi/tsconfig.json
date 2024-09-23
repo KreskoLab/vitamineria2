@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",
+    "skipDefaultLibCheck": true,
     "types": ["@types/node", "@types/koa"]
   },
   "include": [
@@ -11,6 +12,7 @@
   ],
   "exclude": [
     "node_modules/",
+    "../..node_modules/",
     "build/",
     "dist/",
     ".cache/",
