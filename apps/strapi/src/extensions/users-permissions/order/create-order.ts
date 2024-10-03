@@ -23,6 +23,8 @@ interface RequestBody {
 export default async function(ctx: Context & RequestBody) {
 	const { order, cart } = ctx.request.body  
 
+	return false;
+
 	try {
 		await notification();
 	} catch (error) {
