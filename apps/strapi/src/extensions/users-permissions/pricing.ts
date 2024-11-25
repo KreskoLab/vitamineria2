@@ -101,22 +101,38 @@ function productsMapper(products: any[]) {
 export default async function(ctx) {
 	const products = await strapi.entityService.findMany('api::product.product', { populate: '*' }) as Product[];
 	const categories = await strapi.entityService.findMany('api::category.category', { populate: '*' }) as any[]
+	const subcategories = await strapi.entityService.findMany('api::subcategory.subcategory', { populate: '*' }) as any[]
 
 
 	const rozetkaCategories = categories.map(item => ({ id: item.categoryId, rozetka_id: item.rozetka_id, name: item.rozetka_name }))
 
-	const rozetkapProducts = categories.map(category => category.products.map(product => ({ ...product, rozetka_category_name: category.rozetka_name || category.subcategories.find(subcategory => subcategory.rozetka_name), categoryId: category.categoryId }))).flat().filter(product => product.rozetka_available)
-	
-	const rozetkapProductswithPrices = rozetkapProducts.map(item => {
+	const rozetkaProducts = categories.map(category => category.products.map(product => ({ ...product, rozetka_category_name: category.rozetka_name || category.subcategories.find(subcategory => subcategory.rozetka_name), categoryId: category.categoryId }))).flat().filter(product => product.rozetka_available)
+
+	const rozetkaSubcatgoriesProducts = subcategories.map(subcategory => {
+		const parentCategory = categories.find(category => category.subcategories.find(item => item.slug === subcategory.slug));
+
+		return subcategory.products.filter(product => product.rozetka_available).map(product => ({
+			...product,
+			rozetka_category_name: subcategory.rozetka_name || parentCategory.rozetka_name,
+			categoryId: parentCategory.categoryId,
+		}))
+	}).flat()
+
+	const allRozetkaProducts = [...rozetkaProducts, ...rozetkaSubcatgoriesProducts];
+
+
+	const rozetkapProductswithPrices = allRozetkaProducts.map(item => {
 		const itemWithPrice = products.find(product => product.slug === item.slug);
 
-		return {
-			...item,
-			cover: itemWithPrice.cover,
-			images: itemWithPrice.images,
-			prices: itemWithPrice.prices,
+		if (itemWithPrice) {
+			return {
+				...item,
+				cover: itemWithPrice.cover,
+				images: itemWithPrice.images,
+				prices: itemWithPrice.prices,
+			}
 		}
-	})
+	}).filter(item => item)
 
 	const mappedProducts = productsMapper(rozetkapProductswithPrices);
 	const mappedProductsByCategoryId = Object.keys(groupBy(mappedProducts, 'categoryId'));
