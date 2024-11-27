@@ -2,7 +2,7 @@ import type { Product } from 'shared-types';
 import { XMLBuilder, XMLParser } from 'fast-xml-parser';
 import { writeFile } from 'node:fs/promises'
 import { Converter } from 'showdown'
-import { groupBy } from 'lodash'
+import { groupBy, uniqBy } from 'lodash'
 import dayjs from 'dayjs';
 
 const convertor = new Converter();
@@ -118,8 +118,7 @@ export default async function(ctx) {
 		}))
 	}).flat()
 
-	const allRozetkaProducts = [...rozetkaProducts, ...rozetkaSubcatgoriesProducts];
-
+	const allRozetkaProducts = uniqBy([...rozetkaProducts, ...rozetkaSubcatgoriesProducts], 'slug');
 
 	const rozetkapProductswithPrices = allRozetkaProducts.map(item => {
 		const itemWithPrice = products.find(product => product.slug === item.slug);
