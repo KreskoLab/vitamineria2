@@ -32,9 +32,5 @@
     "prettier-config-custom": "*",
     "qs": "^6.11.0",
     "shared-types": "*"
-  },
-
-  "engines": {
-    "node": "18.17.0"
   }
 }
