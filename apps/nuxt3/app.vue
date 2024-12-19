@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const cart = useCart()
 const login = useLogin()
-const resetPassword = useResetPassword()
+const resetPassword = useResetPassword();
 
-await Promise.all([fetchCartProducts(), useFetchUser()])
+onMounted(() => {
+	Promise.all([fetchCartProducts(), useFetchUser()])
+})
 </script>
 
 <template>

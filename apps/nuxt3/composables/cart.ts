@@ -89,7 +89,7 @@ export const fetchCartProducts = async () => {
 	cartProducts.value = []
 
 	if (products.value.length) {
-		const { data: response } = await client<ProductResponse>(`products?${query}`)
+		const { data: response } = await client<ProductResponse>(`https://admin.vitamineria.com.ua/api/products?${query}`)
 
 		products.value.forEach(async item => {
 			try {
