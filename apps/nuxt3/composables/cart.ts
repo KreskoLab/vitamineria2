@@ -1,11 +1,10 @@
-import { Product, Variant } from "@/types";
+import type { Product, Variant } from "@/types";
 import { stringify } from 'qs'
-import { Strapi4ResponseData } from '@nuxtjs/strapi/dist/runtime/types';
 
 type CartProduct = Pick<Product, 'id' | 'count'> & Pick<Variant, 'weight'>
 
 interface ProductResponse {
-	data: Strapi4ResponseData<Product>[]
+	data: any[]
 }
 
 export const cartCookie = () => useCookie<CartProduct[]>('cartCookie', { maxAge: 9600000, default: () => [] })

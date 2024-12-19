@@ -1,4 +1,4 @@
-import { CartTab } from '@/content'
+import type { CartTab } from '@/content'
 
 export const useCart = () => useState<boolean>('cart', () => false)
 export const useLogin = () => useState<boolean>('login', () => false)

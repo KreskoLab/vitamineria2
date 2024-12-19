@@ -1,5 +1,5 @@
 import { createVNode, render } from 'vue'
-import { ToastType } from '@/types'
+import type { ToastType } from '@/types'
 import AppNotification from '@/components/App/AppNotification.vue'
 
 const vNode = createVNode(AppNotification)
