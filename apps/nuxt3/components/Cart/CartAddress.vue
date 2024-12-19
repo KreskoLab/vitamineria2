@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { OrderInfo, PAYMENT, POST } from 'shared-types';
+import { type OrderInfo, PAYMENT, POST } from 'shared-types';
 import { delivery, payments, REGIONS } from '@/content';
-import { FormResponse } from '@/interfaces';
-import { Rozetka } from '@/utils/rozetka'
+import type { FormResponse } from '@/interfaces';
+import type { Rozetka } from '@/utils/rozetka'
 
 const props = defineProps<{
 	productsPrice: number
 }>()
 
-const { find } = useStrapi4()
 const client = useStrapiClient()
 
 const user = useUser()
@@ -21,8 +20,8 @@ const priceWithDiscount = computed(() => props.productsPrice - (discount.value *
 const form = ref<HTMLFormElement | null>(null)
 
 const [formData, adressData] = await Promise.all([
-	find<FormResponse>('user-settings-form'), 
-	find<FormResponse>('user-adress-form')
+	client<FormResponse>('https://admin.vitamineria.com.ua/api/user-settings-form'), 
+	client<FormResponse>('https://admin.vitamineria.com.ua/api/user-adress-form')
 ])
 
 const rozetka = reactive({
@@ -80,7 +79,7 @@ async function pay() {
 	const cartModal = useCart()
 
 	try {
-		const response = await client<string>('/me/order', { method: 'PUT', body: { order, cart } })
+		const response = await client<string>('https://admin.vitamineria.com.ua/api/me/order', { method: 'PUT', body: { order, cart } })
 
 		if (order.payment === PAYMENT.ONLINE) {
 			window.open(response, '_self')
@@ -108,7 +107,7 @@ async function validate() {
 
 async function checkPromocode() {
 	try {
-		const response = await client<number>('/check-coupon', { method: 'POST', body: { coupon: order.promocode } })
+		const response = await client<number>('https://admin.vitamineria.com.ua/api/check-coupon', { method: 'POST', body: { coupon: order.promocode } })
 		discount.value = Number(response)
 	} catch (error) {
 		console.log(error);
@@ -284,7 +283,6 @@ watch(() => order.rozetka.city, async (val) => {
 			<div class="flex flex-col space-y-6 px-4 py-6">
 				<button
 					:key="buttonKey"
-					disabled 
 					class="w-full appearance-none border-2 border-gray-600 text-xl font-medium h-14 bg-green-200"
 					@click="validate"
 				>					
