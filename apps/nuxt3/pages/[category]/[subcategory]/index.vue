@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SubcategoryResponse } from '@/interfaces';
+import type { SubcategoryResponse } from '@/interfaces';
 import { subcategoryQuery } from '@/queries';
 import { SORT } from '@/types';
 	
@@ -11,9 +11,8 @@ const query = subcategoryQuery(param)
 	
 const { data: category } = await useAsyncData(
 	'subcategory',
-	() => client<SubcategoryResponse>(`subcategories?${query}`),
+	() => client<SubcategoryResponse>(`https://admin.vitamineria.com.ua/api/subcategories?${query}`),
 	{
-		initialCache: false,
 		transform: (res) => res.data[0].attributes,
 		default: (): SubcategoryResponse => ({ data: [] })
 	}

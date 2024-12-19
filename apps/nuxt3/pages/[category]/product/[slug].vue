@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { marked } from 'marked';
 import { productAttirbutes } from '@/content';
-import { ProductResponse } from '@/interfaces';
+import type { ProductResponse } from '@/interfaces';
 import type { Variant } from '@/types';
 
 const client = useStrapiClient()
@@ -9,7 +9,7 @@ const route = useRoute()
 
 const param = route.params.slug as string
 
-const { data } = await useAsyncData(() => client<ProductResponse>(`products?filters[slug][$eq]=${param}&populate=*`));
+const { data } = await useAsyncData(() => client<ProductResponse>(`https://admin.vitamineria.com.ua/api/products?filters[slug][$eq]=${param}&populate=*`));
 const response = data.value?.data
 
 const { name, images, prices, brief, in_stock, ...rest } = response[0].attributes

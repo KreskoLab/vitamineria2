@@ -9,7 +9,7 @@ const route = useRoute()
 
 const param = route.params.product as string
 
-const { data } = await useAsyncData(() => client<ProductResponse>(`products?filters[slug][$eq]=${param}&populate=*`))
+const { data } = await useAsyncData(() => client<ProductResponse>(`https://admin.vitamineria.com.ua/api/products?filters[slug][$eq]=${param}&populate=*`))
 const response = data.value?.data
 const { name, images, prices, brief, in_stock, ...rest } = response[0].attributes
 

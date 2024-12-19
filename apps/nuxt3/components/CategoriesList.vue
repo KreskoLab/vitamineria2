@@ -8,7 +8,7 @@ const client = useStrapiClient()
 
 const { data: categories } = await useAsyncData(
 	'categories',
-	() => client<CategoriesResponse>(`categories?${categoriesQuery}`),
+	() => client<CategoriesResponse>(`https://admin.vitamineria.com.ua/api/categories?${categoriesQuery}`),
 	{
 		default: (): CategoriesResponse => ({ data: [] })
 	}
