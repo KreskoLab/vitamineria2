@@ -63,8 +63,8 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					h-full 
 				"
 			>
-				<NuxtLink
-					:to="`/${category.attributes.slug}`"
+				<a
+					:href="`/${category.attributes.slug}`"
 					class="hidden lg:(flex items-center justify-center text-dark-100 text-md font-medium h-full )"
 					:class="{ 'text-dark-400': isActive(category.attributes.slug) }"
 					@mouseenter="getSubcategories(category.attributes.subcategories.data, category.attributes.slug)"
@@ -82,7 +82,7 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 	s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
 						</svg>
 					</div>
-				</NuxtLink>
+				</a>
 
 				<span
 					class="flex items-center text-sm text-dark-100 font-medium cursor-pointer h-full bg-light-400 rounded-md px-1 lg:hidden"
@@ -108,9 +108,9 @@ function showMenuOnMobile(to: string, subcategories: object[]) {
 					:key="subcategory.id"
 					class="text-sm sm:text-lg h-8 lg:h-10"
 				>
-					<NuxtLink :to="`/${subcategoriesMenu.category}/${subcategory.attributes.slug}`">
+					<a :href="`/${subcategoriesMenu.category}/${subcategory.attributes.slug}`">
 						{{ subcategory.attributes.name }}
-					</NuxtLink>
+					</a>
 				</li>
 			</ul>
 		</transition>

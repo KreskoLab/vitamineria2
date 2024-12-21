@@ -32,7 +32,7 @@ onMounted(() => {
 
 		<main 
 			class="overflow-x-hidden pt-30 lg:pt-32">
-			<NuxtPage :page-key="$route.fullPath" />
+			<NuxtPage />
 		</main>
 	</div>
 </template>

@@ -16,7 +16,7 @@ const hasMassage = computed<boolean>(() => props.message && props.message.length
 
 <template>
 	<article class="relative w-full h-full">
-		<NuxtLink class="flex flex-col items-center" :to="`/${category}/${slug}`">
+		<a class="flex flex-col items-center" :href="`/${category}/${slug}`">
 			<NuxtImg 
 				:src="image"
 				:width="width"
@@ -36,7 +36,7 @@ const hasMassage = computed<boolean>(() => props.message && props.message.length
 					{{ decimalPrice }} грн
 				</span>
 			</div>
-		</NuxtLink>
+		</a>
 
 		<div 
 			v-if="hasMassage"
